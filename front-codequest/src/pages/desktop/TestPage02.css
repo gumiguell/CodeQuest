@@ -1,0 +1,126 @@
+.rectangle-icon2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 934px;
+  height: 1116px;
+  object-fit: cover;
+}
+.rectangle-login-icon2 {
+  position: absolute;
+  top: calc(50% - 506.34px);
+  left: calc(50% - 882.26px);
+  border-radius: var(--br-39xl);
+  width: 1881.66px;
+  height: 983.33px;
+  object-fit: cover;
+}
+.background-iniciar2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 910px;
+}
+.logo-padrao-icon6 {
+  position: absolute;
+  top: 987px;
+  left: 779.22px;
+  width: 347.54px;
+  height: 89.6px;
+  object-fit: cover;
+}
+.acha-bacana-a-ideia-de-criar-a {
+  margin: 0;
+  padding-left: var(--padding-28xl);
+}
+.nada-bacana {
+  margin-bottom: 0;
+}
+.acha-bacana-a-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 776px;
+}
+.imagina-se-aprendendo-a-container,
+.valoriza-a-ideia-container {
+  position: absolute;
+  color: var(--color-blueviolet-200);
+  display: inline-block;
+}
+.imagina-se-aprendendo-a-container {
+  top: 0;
+  right: 0;
+  width: 819px;
+}
+.valoriza-a-ideia-container {
+  top: 370px;
+  left: 0;
+  width: 780px;
+}
+.gostaria-de-criar-container {
+  position: absolute;
+  top: 366px;
+  left: 852px;
+  display: inline-block;
+  width: 799px;
+}
+.text-test2 {
+  position: absolute;
+  top: 150px;
+  left: 130px;
+  width: 1651px;
+  height: 678px;
+}
+.title-test-inner {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 314.5px);
+  border-radius: var(--br-mini);
+  background-color: var(--color-blueviolet-100);
+  width: 629px;
+  height: 56px;
+}
+.em-uma-escala2 {
+  position: absolute;
+  top: 8px;
+  left: calc(50% - 302.5px);
+  font-weight: 800;
+  display: inline-block;
+  width: 609px;
+}
+.title-test2 {
+  position: absolute;
+  top: 30px;
+  left: calc(50% - 235.5px);
+  width: 628px;
+  height: 61px;
+  font-size: var(--font-size-16xl);
+  color: var(--color-paleturquoise);
+}
+
+.test-page2 {
+  width: 201.31455993652344px;
+  position: absolute;
+  top: 898px;
+  left: 852.33px;
+}
+.test-page2 {
+  top: 2px;
+  left: 0;
+  width: 1801px;
+  height: 1116px;
+}
+.testpage02-desktop {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 890px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-inherit);
+  color: var(--color-mediumblue);
+  font-family: var(--font-tt-mussels-trl);
+}

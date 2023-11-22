@@ -1,0 +1,126 @@
+.rectangle-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1107px;
+  height: 1116px;
+  object-fit: cover;
+}
+.rectangle-login-icon {
+  position: absolute;
+  top: calc(50% - 506.56px);
+  left: calc(50% - 882.25px);
+  border-radius: var(--br-39xl);
+  width: 1881.66px;
+  height: 981.88px;
+  object-fit: cover;
+}
+.background-iniciar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 910px;
+}
+.logo-padrao-icon4 {
+  position: absolute;
+  top: 987px;
+  left: 779.22px;
+  width: 347.54px;
+  height: 89.6px;
+  object-fit: cover;
+}
+.se-interessa-por-descobrir-inf {
+  margin: 0;
+  padding-left: var(--padding-28xl);
+}
+.nada-interessado {
+  margin-bottom: 0;
+}
+.se-interessa-por-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 776px;
+}
+.gostaria-de-aprender-container,
+.valoriza-a-possibilidade-container {
+  position: absolute;
+  color: var(--color-blueviolet-200);
+  display: inline-block;
+}
+.gostaria-de-aprender-container {
+  top: 0;
+  right: 0;
+  width: 799px;
+}
+.valoriza-a-possibilidade-container {
+  top: 370px;
+  left: 0;
+  width: 780px;
+}
+.se-sente-motivado-container {
+  position: absolute;
+  top: 366px;
+  left: 872px;
+  display: inline-block;
+  width: 799px;
+}
+.text-test {
+  position: absolute;
+  top: 150px;
+  left: 130px;
+  width: 1651px;
+  height: 678px;
+}
+.title-test-child {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 318.5px);
+  border-radius: var(--br-mini);
+  background-color: var(--color-blueviolet-100);
+  width: 637px;
+  height: 56px;
+}
+.em-uma-escala {
+  position: absolute;
+  top: 6px;
+  left: calc(50% - 299.5px);
+  font-weight: 800;
+  display: inline-block;
+  width: 608px;
+}
+.title-test {
+  position: absolute;
+  top: 30px;
+  left: calc(50% - 254.41px);
+  width: 628px;
+  height: 61px;
+  font-size: var(--font-size-16xl);
+  color: var(--color-paleturquoise);
+}
+.continuar1,
+.test-page {
+  width: 201.31455993652344px;
+  position: absolute;
+  top: 898px;
+  left: 852.33px;
+}
+.test-page {
+  top: 2px;
+  left: 0;
+  width: 1801px;
+  height: 1116px;
+}
+.testpage04-desktop {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 890px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-inherit);
+  color: var(--color-mediumblue);
+  font-family: var(--font-tt-mussels-trl);
+}

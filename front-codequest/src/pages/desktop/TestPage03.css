@@ -1,0 +1,126 @@
+.rectangle-icon1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1114px;
+  height: 1116px;
+  object-fit: cover;
+}
+.rectangle-login-icon1 {
+  position: absolute;
+  top: calc(50% - 506.34px);
+  left: calc(50% - 882.25px);
+  border-radius: var(--br-39xl);
+  width: 1881.66px;
+  height: 983.33px;
+  object-fit: cover;
+}
+.background-iniciar1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 910px;
+}
+.logo-padrao-icon5 {
+  position: absolute;
+  top: 987px;
+  left: 779.22px;
+  width: 347.54px;
+  height: 89.6px;
+  object-fit: cover;
+}
+.gostaria-de-aprender-a-fazer-p {
+  margin: 0;
+  padding-left: var(--padding-28xl);
+}
+.nada-gostaria {
+  margin-bottom: 0;
+}
+.gostaria-de-aprender-container1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 776px;
+}
+.transformar-designs-visuais-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: var(--color-blueviolet-200);
+  display: inline-block;
+  width: 799px;
+}
+.valoriza-a-capacidade-container {
+  position: absolute;
+  top: 370px;
+  left: 0;
+  color: var(--color-blueviolet-200);
+  display: inline-block;
+  width: 780px;
+}
+.se-sente-motivado-container1 {
+  position: absolute;
+  top: 370px;
+  left: 850px;
+  display: inline-block;
+  width: 799px;
+}
+.text-test1 {
+  position: absolute;
+  top: 150px;
+  left: 130px;
+  width: 1651px;
+  height: 678px;
+}
+.title-test-item {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 321px);
+  border-radius: var(--br-mini);
+  background-color: var(--color-blueviolet-100);
+  width: 642px;
+  height: 56px;
+}
+.em-uma-escala1 {
+  position: absolute;
+  top: 5px;
+  left: calc(50% - 299px);
+  font-weight: 800;
+  display: inline-block;
+  width: 607px;
+}
+.title-test1 {
+  position: absolute;
+  top: 30px;
+  left: calc(50% - 254.41px);
+  width: 628px;
+  height: 61px;
+  font-size: var(--font-size-16xl);
+  color: var(--color-paleturquoise);
+}
+.continuar2,
+.test-page1 {
+  width: 201.31455993652344px;
+  position: absolute;
+  top: 898px;
+  left: 852.33px;
+}
+.test-page1 {
+  top: 2px;
+  left: 0;
+  width: 1800.81px;
+  height: 1116px;
+}
+.testpage03-desktop {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 890px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-inherit);
+  color: var(--color-mediumblue);
+  font-family: var(--font-tt-mussels-trl);
+}

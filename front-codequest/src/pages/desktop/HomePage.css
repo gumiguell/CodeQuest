@@ -1,0 +1,488 @@
+.home-page-desktop {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  font-size: 1.6vw; /* Use vw para tamanho de fonte responsivo */
+  color: var(--color-white);
+  font-family: var(--font-tt-mussels-trl);
+  overflow-x: hidden;
+}
+
+.background-contact-icon {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+.cdquestinsta {
+  margin-left: 90px;
+  margin-top: -55px;
+}
+
+.cdquestmail {
+  margin-left: 90px;
+  margin-top: 15px;
+}
+
+.cdquestloca {
+  margin-left: 90px;
+  margin-top: -50px;
+}
+.logos-icon {
+  position: absolute;
+  top: 195px;
+  left: 127px;
+  width: 330px;
+  height: 255px;
+  object-fit: cover;
+}
+
+.vector-icon {
+  position: absolute;
+  left: 0;
+}
+
+.gmail {
+  position: absolute;
+  height: 29.06%;
+  width: 72.39%;
+  top: 34.54%;
+  right: 27.61%;
+  bottom: 36.41%;
+}
+
+.codequest- {
+  text-decoration: underline;
+  position: absolute;
+  width: 65.21%;
+  top: 26.31%;
+  left: 34.79%;
+  color: inherit;
+  display: inline-block;
+}
+
+.instagram{
+  position: absolute;
+}
+
+.gmail{
+  position: absolute;
+}
+
+.local{
+  position: absolute;
+}
+
+.local {
+  height: 30%;
+  top: 69%;
+}
+
+
+
+.vector-icon,
+.vector-icon1,
+.vector-icon2 {
+  width: 70px;
+  height: 70px;
+}
+
+.vector-icon:hover,
+.vector-icon1:hover,
+.vector-icon2:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.contact-page,
+.socials {
+  position: absolute;
+  object-fit: cover;
+  top: 26.74%;
+  right: 5.99%;
+  bottom: 28.41%;
+  left: 59.11%;
+}
+
+.contact-page {
+  height: 23.96%;
+  width: 100%;
+  top: 76.04%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.image-10-icon,
+.rock-of-the-astronaut-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1925px;
+  height: 945px;
+  object-fit: cover;
+}
+
+.rock-of-the-astronaut-1 {
+  height: 26.14%;
+  width: 33.18%;
+  right: 8.49%;
+  bottom: 73.86%;
+  left: 58.33%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+
+.about-us {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-block;
+  width: 389.01px;
+}
+
+.rectangle-title {
+  position: absolute;
+  top: 101px;
+  left: 0;
+  background-color: var(--color-midnightblue);
+  width: 212.55px;
+  height: 32px;
+  overflow: hidden;
+}
+
+.rectangle-high {
+  position: relative;
+  border-radius: 0px 0px 20px 20px;
+  background: linear-gradient(90deg, #6113a8, rgba(69, 63, 203, 0));
+  backdrop-filter: blur(25px);
+  width: 100%;
+  height: 96px;
+}
+
+.title-about {
+  position: absolute;
+  top: 116px;
+  left: 62.16px;
+  width: 389.01px;
+  height: 133px;
+  font-size: var(--font-size-81xl);
+}
+
+.c {
+  font-family: var(--font-tt-mussels-trl);
+}
+
+.txtAbout {
+  margin: 0;
+  position: absolute;
+  top: 336px;
+  left: 62.16px;
+  font-size: var(--font-size-21xl);
+  display: inline-block;
+  width: 1700.42px;
+  font-family: inherit;
+}
+
+.image-6-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--br-107xl);
+  width: 271.71px;
+  height: 256px;
+  object-fit: cover;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.image-6-icon:hover {
+  transform: scale(1.1);
+}
+
+.gustavo-miguel {
+  margin: 0;
+  position: absolute;
+  top: 258px;
+  left: 15.99px;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+  display: inline-block;
+  width: 234.61px;
+  text-shadow: 2px 1px 0#2d0159;
+}
+
+.gustavo,
+.image-4-icon {
+  position: absolute;
+  top: 545px;
+  left: 117.3px;
+  width: 271.71px;
+  height: 297px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.image-4-icon:hover {
+  transform: scale(1.1);
+}
+
+.image-4-icon {
+  top: 0;
+  left: 0;
+  border-radius: var(--br-107xl);
+  width: 269.7px;
+  height: 252px;
+  object-fit: cover;
+}
+
+.kauan-piacente {
+  margin: 0;
+  position: absolute;
+  top: 258px;
+  left: 18.97px;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+  display: inline-block;
+  width: 235.61px;
+  text-shadow: 2px 1px 0#2d0159;
+}
+
+.kauan {
+  position: absolute;
+  top: 545px;
+  left: 786.04px;
+  width: 269.7px;
+  height: 297px;
+}
+
+.joo-victor {
+  margin: 0;
+  position: absolute;
+  top: 264px;
+  left: 49.08px;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+  display: inline-block;
+  width: 167.43px;
+  text-shadow: 2px 1px 0#2d0159;
+}
+
+.image-5-icon,
+.joo {
+  position: absolute;
+  width: 269.7px;
+}
+
+.image-5-icon {
+  top: 0;
+  left: 0;
+  border-radius: var(--br-107xl);
+  height: 263px;
+  object-fit: cover;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.image-5-icon:hover {
+  transform: scale(1.1);
+}
+
+.joo {
+  top: 539px;
+  left: 1466.81px;
+  height: 303px;
+}
+
+.about-page,
+.background-high-icon {
+  position: absolute;
+  top: 1083px;
+  left: 0;
+  width: 1925px;
+  height: 945px;
+}
+
+.background-high-icon {
+  top: 0;
+  height: 1083px;
+  object-fit: cover;
+}
+
+.astronaut-icon,
+.rectangle-high-icon {
+  position: absolute;
+  top: 96px;
+  left: 1079px;
+  width: 828px;
+  height: 987px;
+  object-fit: cover;
+}
+
+.rectangle-high-icon {
+  top: 0;
+  left: 0;
+  border-radius: var(--br-xl);
+  width: 1925px;
+  height: 96px;
+}
+
+.logo-branco-icon {
+  position: absolute;
+  top: 15px;
+  left: 42px;
+  width: 295px;
+  height: 66px;
+  object-fit: cover;
+}
+
+.about {
+  margin: 0;
+  top: 0;
+  left: 0;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-block;
+  width: 179px;
+  cursor: pointer;
+  cursor: pointer;
+  color: var(--color-white);
+  font-family: var(--font-tt-mussels-trl);
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.about:active {
+  transform: scale(0.9);
+}
+
+.about,
+.contact,
+.high,
+.text-high {
+  position: absolute;
+  height: 65px;
+}
+
+.contact {
+  margin: 0;
+  top: 0;
+  left: 294px;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-block;
+  width: 179px;
+  cursor: pointer;
+  color: var(--color-white);
+  font-family: var(--font-tt-mussels-trl);
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.contact:active {
+  transform: scale(0.9);
+}
+
+.text-high {
+  top: 16px;
+  left: 1368px;
+  width: 473px;
+}
+
+.high {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1925px;
+  height: 59px;
+  text-align: left;
+  font-size: var(--font-size-31xl);
+  color: var(--color-white);
+  font-family: var(--font-tt-mussels-trl);
+  z-index: 1000;
+
+}
+
+.seu-teste-tecnolgico-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+.boto-iniciar {
+  margin: 40px;
+  width: 270px;
+  height: 70px;
+  position: absolute;
+  top: calc(50% + 127.5px);
+  left: 450px;
+  background-image: linear-gradient(to right, #D100FF, #DB00FF);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: var(--br-31xl);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  font-size: var(--font-size-21xl);
+  font-weight: bold;
+}
+
+.boto-iniciar:active {
+  transform: scale(0.9);
+}
+
+.title4 {
+  position: absolute;
+  top: 260px;
+  left: 142px;
+  width: 1026px;
+  height: 495px;
+  position: absolute;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+.high-page {
+  top: 0;
+  left: 0;
+  width: 100%; /* Defina a largura que você deseja, por exemplo, 100% para ocupar toda a largura */
+  height: 70px; /* Defina a altura que você deseja, por exemplo, 70px */
+  font-size: var(--font-size-131xl);
+}
+
+
+.home-page-desktop {
+  position: relative;
+  width: 100%;
+  height: 2659px;
+  text-align: left;
+  font-size: var(--font-size-16xl);
+  color: var(--color-white);
+  font-family: var(--font-tt-mussels-trl);
+}

@@ -1,0 +1,68 @@
+
+
+@font-face {
+  font-family: "TT Mussels Trl";
+  src: url("/public/TT Mussels Trial Bold.otf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "TT Mussels Trl";
+  src: url("/public/TT Mussels Trial ExtraBold.otf");
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "TT Mussels Trl";
+  src: url("/public/TT Mussels Trial Regular.otf");
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  /* fonts */
+  --font-tt-mussels-trl: "TT Mussels Trl";
+  --font-inherit: inherit;
+
+  /* font sizes */
+  --font-size-9xl: 1.75rem;
+  --font-size-21xl: 2.5rem;
+  --font-size-41xl: 3.75rem;
+  --font-size-16xl: 2.19rem;
+  --font-size-6xl: 1.56rem;
+  --font-size-11xl: 1.88rem;
+  --font-size-131xl: 9.38rem;
+  --font-size-31xl: 3.13rem;
+  --font-size-81xl: 6.25rem;
+  --font-size-51xl: 4.38rem;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-darkorchid: #ab01bf;
+  --color-fuchsia-100: #db00ff;
+  --color-fuchsia-200: #cb02e3;
+  --color-gainsboro-100: #e1e1e1;
+  --color-mediumblue: #3f10ba;
+  --color-indigo: #5833bb;
+  --color-paleturquoise: #bffef4;
+  --color-blueviolet-100: #632cf2;
+  --color-blueviolet-200: #5f2de1;
+  --color-midnightblue: #2d0159;
+
+  /* Paddings */
+  --padding-18xl: 2.31rem;
+  --padding-28xl: 2.94rem;
+
+  /* Border radiuses */
+  --br-18xl: 37px;
+  --br-31xl: 50px;
+  --br-39xl: 58px;
+  --br-mini: 15px;
+  --br-xl: 20px;
+  --br-107xl: 126px;
+  --br-81xl: 100px;
+}

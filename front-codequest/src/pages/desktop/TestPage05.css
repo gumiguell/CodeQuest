@@ -1,0 +1,138 @@
+.rectangle-icon4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 950px;
+  height: 1110px;
+  object-fit: cover;
+}
+.rectangle-login-icon4 {
+  position: absolute;
+  top: calc(50% - 506.34px);
+  left: calc(50% - 882.25px);
+  border-radius: var(--br-39xl);
+  width: 1881.66px;
+  height: 983.33px;
+  object-fit: cover;
+}
+.background-iniciar4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 910px;
+}
+.logo-padrao-icon8 {
+  position: absolute;
+  top: 987px;
+  left: 779.22px;
+  width: 347.54px;
+  height: 89.6px;
+  object-fit: cover;
+}
+.se-preocupa-em-proteger-inform {
+  margin: 0;
+  padding-left: var(--padding-28xl);
+}
+.nada-preocupado {
+  margin-bottom: 0;
+}
+.se-preocupa-em-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 776px;
+}
+.gostaria-de-aprender-container3,
+.se-sente-atrado-container1 {
+  position: absolute;
+  color: var(--color-blueviolet-200);
+  display: inline-block;
+}
+.se-sente-atrado-container1 {
+  top: 0;
+  right: 0;
+  width: 799px;
+}
+.gostaria-de-aprender-container3 {
+  top: 370px;
+  left: 0;
+  width: 780px;
+}
+.se-sente-motivado-container2 {
+  position: absolute;
+  top: 366px;
+  left: 872px;
+  display: inline-block;
+  width: 799px;
+}
+.text-test4 {
+  position: absolute;
+  top: 150px;
+  left: 130px;
+  width: 1651px;
+  height: 678px;
+}
+.title-test-child1 {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 313px);
+  border-radius: var(--br-mini);
+  background-color: var(--color-blueviolet-100);
+  width: 626px;
+  height: 56px;
+}
+.em-uma-escala4 {
+  position: absolute;
+  top: 8px;
+  left: calc(50% - 301px);
+  font-weight: 800;
+  display: inline-block;
+  width: 614px;
+}
+.title-test4 {
+  position: absolute;
+  top: 30px;
+  left: calc(50% - 254.41px);
+  width: 628px;
+  height: 61px;
+  font-size: var(--font-size-16xl);
+  color: var(--color-paleturquoise);
+}
+.continuar5,
+.continuar6 {
+  position: absolute;
+  top: 5px;
+  left: 37px;
+}
+.continuar5 {
+  top: 898px;
+  left: 852.33px;
+  border-radius: var(--br-31xl);
+  background-color: var(--color-fuchsia-200);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  width: 201.31px;
+  height: 43px;
+  overflow: hidden;
+  font-size: var(--font-size-11xl);
+  color: var(--color-gainsboro-100);
+}
+.test-page4 {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 1801px;
+  height: 1116px;
+}
+.testpage05-desktop {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 890px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-inherit);
+  color: var(--color-mediumblue);
+  font-family: var(--font-tt-mussels-trl);
+}

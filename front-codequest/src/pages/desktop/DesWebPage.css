@@ -1,0 +1,189 @@
+.background-icon2,
+.image-24-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1112px;
+  object-fit: cover;
+}
+.image-24-icon {
+  position: absolute;
+  margin-top: 240px;
+  border-radius: 0 var(--br-18xl) var(--br-18xl) 0;
+  width: 445px;
+  height: 520px;
+  object-fit: cover;
+}
+.logo-padrao-icon2 {
+  position: absolute;
+  top: 20px;
+  left: 32px;
+  width: 353px;
+  height: 91.01px;
+  object-fit: cover;
+}
+.objetivo3 {
+  font-weight: 900;
+  font-family: var(--font-tt-mussels-trl);
+}
+.blank-line8 {
+  margin: 0;
+}
+.o-que-faz-profissionais-dessa {
+  margin: 0;
+  padding-left: var(--padding-18xl);
+}
+.objetivo-a-rea-container2 {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 640px);
+  display: inline-block;
+  width: 1156px;
+  height: 690px;
+}
+.cursos-de-html {
+  margin-bottom: 0;
+}
+.curso-de-graduao-container {
+  position: absolute;
+  top: 280px;
+  left: calc(50% - 639px);
+  font-weight: 900;
+  font-family: var(--font-inherit);
+  color: var(--color-mediumblue);
+  text-align: right;
+  display: inline-block;
+  width: 958px;
+  height: 267px;
+}
+.icon2,
+.text2 {
+  position: absolute;
+}
+.icon2 {
+  top: 486px;
+  left: 168px;
+  width: 137px;
+  height: 137px;
+  object-fit: cover;
+}
+.text {
+  top: 280px;
+  left: calc(50% - 435px);
+  width: 1280px;
+  height: 714px;
+  font-size: 21.5px;
+  color: var(--color-indigo);
+}
+.teste-finalizado {
+  top: -40px;
+  position: absolute;
+  font-weight: 900;
+  width: 800px;
+  height: 89px;
+  font-size: 50px;
+  color: blueviolet;
+}
+.desenvolvimento-web{
+  top: 10px;
+  position: absolute;
+  font-weight: bold;
+  width: 1000px;
+  height: 89px;
+  font-size: 50px;
+  color: blueviolet;
+}
+
+.title {
+  position: absolute;
+  top: 169px;
+  left: calc(50% - 901px);
+  width: 1453px;
+  height: 158px;
+  font-size: var(--font-size-41xl);
+  color: var(--color-mediumblue);
+}
+
+.botao-voltar1,
+.voltar-a-tela2 {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+}
+.botao-voltar1 {
+  top: 32px;
+  left: 1524px;
+  border-radius: var(--br-31xl);
+  background-color: var(--color-fuchsia-200);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  width: 369px;
+  height: 67px;
+  overflow: hidden;
+  color: var(--color-gainsboro-100);
+}
+.salvar-teste2 {
+  position: absolute;
+  top: 12px;
+  left: 49px;
+}
+.botao-salvar-teste {
+  position: absolute;
+  top: 133px;
+  left: 1524px;
+  border-radius: var(--br-31xl);
+  background-color: var(--color-fuchsia-200);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  width: 369px;
+  height: 67px;
+  overflow: hidden;
+  color: var(--color-gainsboro-100);
+}
+.group-icon2,
+.r-2849ms {
+  position: absolute;
+  top: 12px;
+  left: 65px;
+}
+.group-icon2 {
+  height: 100%;
+  width: 22.45%;
+  top: 0;
+  right: 77.55%;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: cover;
+}
+.money-text {
+  position: absolute;
+  top: 785px;
+  left: 100px;
+  font-size: 30px;
+  color: var(--color-darkorchid);
+}
+.money{
+  width: 40px;
+  margin-left: -5px;
+  margin-top: -3px;
+}
+.desweb-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1112px;
+}
+.desweb-page-desktop {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 1000px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-21xl);
+  color: var(--color-gainsboro-100);
+  font-family: var(--font-tt-mussels-trl);
+}
