@@ -29,9 +29,7 @@ const SavePageDesktop: FunctionComponent = () => {
   return (
     <div className="save-page-desktop">
       <div className="save-page">
-        <img className="image-12-icon" alt="" src="/image-12@2x.png" />
         <div className="save-page-child" />
-        <img className="logo-branca-icon" alt="" src="/logo-branca@2x.png" />
         <div className="rectangle">
           <img className="image-14-icon" alt="" src="/image-14@2x.png" />
           <div className="rectangle-child" />
@@ -61,9 +59,16 @@ const SavePageDesktop: FunctionComponent = () => {
               por favor, digite seu email e nós enviaremos seu teste em breve
             </div>
           </div>
-          <img className="x-icon" alt="" src="/x.png">
-            <Link to="/"></Link>
-          </img>
+          <Link to="/">
+            <Button
+              className="x-icon"
+              variant="primary"
+              onClick={handleRedirect}
+              disabled={redirecting}
+            >
+              {redirecting ? "Aguarde..." : "X"}
+            </Button>
+        </Link>
         </div>
       </div>
     </div>

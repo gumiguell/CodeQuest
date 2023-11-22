@@ -158,6 +158,18 @@ const TestPage03Desktop: FunctionComponent = () => {
               {redirecting ? "Aguarde..." : "CONTINUAR"}
             </Button>
         </Link>
+        <Link to="/testpage02">
+            <Button
+              className="boto-anterior"
+              name="Botão Anterior"
+              id="btnAnterior"
+              variant="primary"
+              onClick={handleRedirect}
+              disabled={redirecting}
+            >
+              {redirecting ? "Aguarde..." : "⬅"}
+            </Button>
+        </Link>
       </div>
     </div>
   );

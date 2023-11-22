@@ -87,7 +87,6 @@ const DesAplicativosPageDesktop: FunctionComponent = () => {
               </li>
             </ul>
           </div>
-          <img className="icon4" alt="" src="/1.png" />
         </div>
         <div className="title">
           <b className="teste-finalizado3">TESTE FINALIZADO:</b>
@@ -109,7 +108,7 @@ const DesAplicativosPageDesktop: FunctionComponent = () => {
                 onClick={handleRedirect}
                 disabled={redirecting}
               >
-                {redirecting ? "Aguarde..." : "Voltar a tela inicial"}
+                {redirecting ? "Aguarde..." : "VOLTAR A TELA INICIAL"}
               </Button>
           </Link>
         </div>

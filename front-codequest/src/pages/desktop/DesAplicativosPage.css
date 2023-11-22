@@ -154,18 +154,7 @@
   top: 12px;
   left: 49px;
 }
-.botao-salvar-teste3 {
-  position: absolute;
-  top: 135px;
-  left: 1524px;
-  border-radius: var(--br-31xl);
-  background-color: var(--color-fuchsia-200);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  width: 369px;
-  height: 67px;
-  overflow: hidden;
-  color: var(--color-gainsboro-100);
-}
+
 .desaplicativos-page
 {
   position: absolute;

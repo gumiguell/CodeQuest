@@ -1,21 +1,21 @@
 import { FunctionComponent } from "react";
 import "./DesSoftwarePage.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
-
+import SavePageDesktop from "./SavePage";
 
 const DesSoftwarePageDesktop: FunctionComponent = () => {
   const [redirecting, setRedirecting] = useState(false);
+  const [showPopup, setShowPopup] = useState(false); // Estado para controlar a exibição do popup
 
   const handleRedirect = () => {
-    // Ativar o sinalizador de redirecionamento para mostrar algum indicador de carregamento (opcional).
     setRedirecting(true);
 
-    // Atraso de 1000 milissegundos (1 segundo) antes do redirecionamento.
     setTimeout(() => {
-      setRedirecting(false); // Desativar o sinalizador de redirecionamento.
-    }, 5000); // 1000 milissegundos = 1 segundo
+      setRedirecting(false);
+      setShowPopup(true); // Mostrar o popup após o tempo de espera
+    }, 5000);
   };
 
   return (
@@ -28,10 +28,13 @@ const DesSoftwarePageDesktop: FunctionComponent = () => {
             <ul className="objetivo-a-rea-de-desenvolvi">
               <li className="cursos-online-de">
                 <span className="span">
-                  <span className="objetivo2">Objetivo:</span>
+                  <span className="objetivo2">Objetivo: </span>
                 </span>
                 <b>
-                  A área de Desenvolvimento de Software e Aplicações tem como objetivo criar programas e aplicativos que atendam às necessidades das empresas e dos usuários, proporcionando soluções tecnológicas para diversos desafios.
+                  A área de Desenvolvimento de Software e Aplicações tem como
+                  objetivo criar programas e aplicativos que atendam às
+                  necessidades das empresas e dos usuários, proporcionando
+                  soluções tecnológicas para diversos desafios.
                 </b>
               </li>
             </ul>
@@ -48,8 +51,12 @@ const DesSoftwarePageDesktop: FunctionComponent = () => {
                 <b>
                   <span>{` `}</span>
                   <span>
-                    Os profissionais dessa área escrevem códigos e projetam sistemas de software para desenvolver aplicativos de computador, software empresarial e muito mais. Eles podem trabalhar em uma variedade de setores, desde jogos até aplicativos financeiros.
-                </span>
+                    Os profissionais dessa área escrevem códigos e projetam
+                    sistemas de software para desenvolver aplicativos de
+                    computador, software empresarial e muito mais. Eles podem
+                    trabalhar em uma variedade de setores, desde jogos até
+                    aplicativos financeiros.
+                  </span>
                 </b>
               </li>
             </ul>
@@ -58,7 +65,7 @@ const DesSoftwarePageDesktop: FunctionComponent = () => {
                 <span>&nbsp;</span>
               </b>
             </p>
-            <ul className= "objetivo-a-rea-de-desenvolvi">
+            <ul className="objetivo-a-rea-de-desenvolvi">
               <li>
                 <span>
                   <span className="objetivo2">Vantagens:</span>
@@ -66,8 +73,12 @@ const DesSoftwarePageDesktop: FunctionComponent = () => {
                 <b>
                   <span>{` `}</span>
                   <span>
-                    Trabalhar com desenvolvimento de software permite a criação de soluções úteis e inovadoras. Os desenvolvedores podem ver suas ideias ganhando vida em forma de software. Além disso, a demanda por desenvolvedores de software é alta, o que proporciona boas oportunidades de emprego e carreira.
-                </span>
+                    Trabalhar com desenvolvimento de software permite a criação
+                    de soluções úteis e inovadoras. Os desenvolvedores podem ver
+                    suas ideias ganhando vida em forma de software. Além disso,
+                    a demanda por desenvolvedores de software é alta, o que
+                    proporciona boas oportunidades de emprego e carreira.
+                  </span>
                 </b>
               </li>
             </ul>
@@ -75,56 +86,66 @@ const DesSoftwarePageDesktop: FunctionComponent = () => {
           <div className="curso-de-graduao-container">
             <ul className="objetivo-a-rea-de-desenvolvi">
               <li className="cursos-online-de">
-                Curso de Graduação em Ciência da Computação, Engenharia de Software ou áreas relacionadas.
+                Curso de Graduação em Ciência da Computação, Engenharia de
+                Software ou áreas relacionadas.
               </li>
             </ul>
             <p className="blank-line6">&nbsp;</p>
             <ul className="objetivo-a-rea-de-desenvolvi">
               <li className="cursos-online-de">
-                Cursos online de programação em linguagens populares como Java, Python, C# ou JavaScript.
+                Cursos online de programação em linguagens populares como Java,
+                Python, C# ou JavaScript.
               </li>
             </ul>
             <p className="blank-line6">&nbsp;</p>
             <ul className="objetivo-a-rea-de-desenvolvi">
               <li>
-                Participação em bootcamps de desenvolvimento de software que ofereçam treinamento intensivo e prático.
+                Participação em bootcamps de desenvolvimento de software que
+                ofereçam treinamento intensivo e prático.
               </li>
             </ul>
-          </div>          
+          </div>
         </div>
         <div className="title">
           <b className="teste-finalizado">TESTE FINALIZADO:</b>
-          <div className="desenvolvimento-de-software">DESENVOLVIMENTO DE SOFTWARE</div>
+          <div className="desenvolvimento-de-software">
+            DESENVOLVIMENTO DE SOFTWARE
+          </div>
         </div>
         <div>
           <Link to="/">
-              <Button
-                className="boto-voltar"
-                name="Botão Voltar"
-                id="btnVoltar"
-                variant="primary"
-                onClick={handleRedirect}
-                disabled={redirecting}
-              >
-                {redirecting ? "Aguarde..." : "Voltar a tela inicial"}
-              </Button>
+            <Button
+              className="boto-voltar"
+              name="Botão Voltar"
+              id="btnVoltar"
+              variant="primary"
+              onClick={handleRedirect}
+              disabled={redirecting}
+            >
+              {redirecting ? "Aguarde..." : "VOLTAR A TELA INICIAL"}
+            </Button>
           </Link>
-        </div>
-        <div>
           <Link to="/save">
-              <Button
-                className="botao-salvar-teste"
-                name="Botão Salvar"
-                id="btnSalvar"
-                variant="primary"
-                onClick={handleRedirect}
-                disabled={redirecting}
-              >
-                {redirecting ? "Aguarde..." : "SALVAR TESTE"}
-              </Button>
+            <Button
+              className="botao-salvar-teste"
+              name="Botão Salvar"
+              id="btnSalvar"
+              variant="primary"
+              onClick={() => setShowPopup(true)} // Mostrar o popup ao clicar no botão "Salvar Teste"
+              disabled={redirecting}
+            >
+              {redirecting ? "Aguarde..." : "SALVAR TESTE"}
+            </Button>
           </Link>
+
+          {/* Popup */}
+          {showPopup && <SavePageDesktop />}
         </div>
-        <img className="image-software-icon" alt="" src="/image-software@2x.png" />
+        <img
+          className="image-software-icon"
+          alt=""
+          src="/image-software@2x.png"
+        />
         <div className="money-text">
           <img className="money" alt="" src="/money.svg" />
           <b className="valor">R$ 4.780/mês</b>

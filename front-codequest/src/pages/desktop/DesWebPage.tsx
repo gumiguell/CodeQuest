@@ -107,7 +107,7 @@ const DesWebPageDesktop: FunctionComponent = () => {
                 onClick={handleRedirect}
                 disabled={redirecting}
               >
-                {redirecting ? "Aguarde..." : "Voltar a tela inicial"}
+                {redirecting ? "Aguarde..." : "VOLTAR A TELA INICIAL"}
               </Button>
           </Link>
         </div>

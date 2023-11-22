@@ -28,10 +28,7 @@
   height: 89.6px;
   object-fit: cover;
 }
-.se-sente-empolgado-com-a-ideia {
-  margin: 0;
-  padding-left: var(--padding-28xl);
-}
+
 .nada-empolgado {
   margin-bottom: 0;
 }
@@ -146,4 +143,39 @@
 
 .boto-continuar:active{
   transform: scale(0.9);
+}
+
+.boto-anterior {
+  position: absolute;
+  top: 20px;
+  left: 100px;
+  width: 70px;
+  height: 70px;
+  background-image: linear-gradient(to right, #D100FF, #DB00FF);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: var(--br-31xl);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  font-size: var(--font-size-21xl);
+  font-weight: bold;
+}
+
+.boto-anterior:active{
+  transform: scale(0.9);
+}
+
+.nada-empolgado input + label:before{
+  content: '';
+  width: 16px;
+  height: 16px;
+  border-radius: 50px;
+  background-color: white;
+  border: 1px solid gray;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  margin-bottom: 3px;
 }

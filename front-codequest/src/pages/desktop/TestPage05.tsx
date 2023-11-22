@@ -145,7 +145,7 @@ const TestPage05Desktop: FunctionComponent = () => {
             Em uma escala de 1 a 5, o quanto você:
           </div>
         </div>
-        <Link to="/save">
+        <Link to="/">
             <Button
               className="boto-continuar"
               name="Botão Continuar"
@@ -154,7 +154,19 @@ const TestPage05Desktop: FunctionComponent = () => {
               onClick={handleRedirect}
               disabled={redirecting}
             >
-              {redirecting ? "Aguarde..." : "CONTINUAR"}
+              {redirecting ? "Aguarde..." : "FINALIZAR"}
+            </Button>
+        </Link>
+        <Link to="/testpage04">
+            <Button
+              className="boto-anterior"
+              name="Botão Anterior"
+              id="btnAnterior"
+              variant="primary"
+              onClick={handleRedirect}
+              disabled={redirecting}
+            >
+              {redirecting ? "Aguarde..." : "⬅"}
             </Button>
         </Link>
       </div>
