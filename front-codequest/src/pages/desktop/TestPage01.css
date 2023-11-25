@@ -1,3 +1,22 @@
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  background-color: white; /* Defina a cor inicial como branca */
+  transition: background-color 0.3s ease; /* Adicione a transição */
+
+}
+
+input[type="radio"]:checked {
+  background-color: #DB00FF; /* Ao ser marcado, muda para roxo */
+}
+
+
 .rectangle-icon3 {
   position: absolute;
   top: 0;

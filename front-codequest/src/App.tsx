@@ -21,6 +21,7 @@ import TestPage01 from "./pages/desktop/TestPage01";
 import TestPage05 from "./pages/desktop/TestPage05";
 import HomePage from "./pages/desktop/HomePage";
 import SegTiPage from "./pages/desktop/SegTiPage";
+import ErrorPage from "./pages/desktop/ErrorPage";
 
 window.React = React;
 
@@ -84,6 +85,9 @@ function App() {
         title = "";
         metaDescription = "";
         break;
+      case "/errorpage":
+        title = "";
+        break;
     }
 
     if (title) {
@@ -112,7 +116,8 @@ function App() {
       <Route path="/desweb" element={<DesWebPage />} />
       <Route path="/desaplicativos" element={<DesAplicativosPage />} />
       <Route path="/segti" element={<SegTiPage />} />
-      <Route path="/save" element={<SavePage />} /> */
+      <Route path="/save" element={<SavePage />} /> 
+      <Route path="error" element={<ErrorPage />} />*/
     </Routes>
   );
 }

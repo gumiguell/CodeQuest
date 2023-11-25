@@ -139,9 +139,9 @@ const TestPage05Desktop: FunctionComponent = () => {
             </ul>
           </div>
         </div>
-        <div className="title-test4">
-          <div className="title-test-child1" />
-          <div className="em-uma-escala4">
+        <div className="title-test3">
+          <div className="rectangle-div" />
+          <div className="em-uma-escala3">
             Em uma escala de 1 a 5, o quanto você:
           </div>
         </div>

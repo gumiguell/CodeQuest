@@ -1,13 +1,32 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, SetStateAction } from "react";
 import "./TestPage01.css";
 import { Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { useState } from "react";
 
 
+
 const TestPage01Desktop: FunctionComponent = () => {
   const [redirecting, setRedirecting] = useState(false);
+  
+  const [respostaSelecionada, setRespostaSelecionada] = useState('');
+  const [indicePerguntaSelecionada, setIndicePerguntaSelecionada] = useState(null);
 
+  const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }, indicePergunta: SetStateAction<null>) => {
+    setRespostaSelecionada(event.target.value);
+    setIndicePerguntaSelecionada(indicePergunta);
+  };
+  const obterIndicePerguntaComRespostaSelecionada = () => {
+    return indicePerguntaSelecionada;
+  };
+
+  // const [respostaSelecionada, setRespostaSelecionada] = useState('');
+
+  // // Função para atualizar o estado quando um input for pressionado
+  // const handleInputChange = (event) => {
+  //   setRespostaSelecionada(event.target.value);
+  // };
+  
   const handleRedirect = () => {
     // Ativar o sinalizador de redirecionamento para mostrar algum indicador de carregamento (opcional).
     setRedirecting(true);
@@ -17,7 +36,6 @@ const TestPage01Desktop: FunctionComponent = () => {
       setRedirecting(false); // Desativar o sinalizador de redirecionamento.
     }, 5000); // 1000 milissegundos = 1 segundo
   };
-
 
   return (
     <div className="testpage01-desktop">
@@ -42,10 +60,12 @@ const TestPage01Desktop: FunctionComponent = () => {
             </ul>
             <ul className="se-sente-empolgado-com-a-ideia">
               <h4 className="nada-empolgado">
-                <label><input type="radio" value="nadaEmplogado" name="resposta1"/> Nada Empolgado</label>
+                <label><input type="radio" value="nadaEmplogado" name="resposta1"checked={respostaSelecionada === 'nadaEmplogado'}
+                /> Nada Empolgado</label>
               </h4>
               <h4 className="nada-empolgado">
-                <label><input type="radio" value="poucoEmplogado" name="resposta1"/> Pouco Empolgado</label>
+                <label><input type="radio" value="poucoEmplogado" name="resposta1" checked={respostaSelecionada === 'poucoEmplogado'}
+                  /> Pouco Empolgado</label>
               </h4>
               <h4 className="nada-empolgado">
                 <label><input type="radio" value="neutro" name="resposta1"/> Neutro</label>
