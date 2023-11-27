@@ -1,32 +1,36 @@
 import { FunctionComponent, SetStateAction } from "react";
 import "./TestPage01.css";
 import { Button } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
+interface RespostaMatriz {
+  [indicePergunta: number]: string[];
+}
 
-
+let resp: any[][] = [[]];
+export const retResp = () => {
+  return resp;
+}
 const TestPage01Desktop: FunctionComponent = () => {
   const [redirecting, setRedirecting] = useState(false);
-  
-  const [respostaSelecionada, setRespostaSelecionada] = useState('');
+  const [resps, setResps] = useState<any[]>([]);  
+  const [respostaSelecionada, setRespostaSelecionada] = useState(null);
   const [indicePerguntaSelecionada, setIndicePerguntaSelecionada] = useState(null);
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, indicePergunta: number) => {
+    const novaResposta = event.target.value;
 
-  const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }, indicePergunta: SetStateAction<null>) => {
-    setRespostaSelecionada(event.target.value);
-    setIndicePerguntaSelecionada(indicePergunta);
+    if (!resp[indicePergunta]) {
+      resp[indicePergunta] = [];
+    }
+
+    resp[indicePergunta].push(novaResposta);
   };
+
   const obterIndicePerguntaComRespostaSelecionada = () => {
     return indicePerguntaSelecionada;
   };
 
-  // const [respostaSelecionada, setRespostaSelecionada] = useState('');
-
-  // // Função para atualizar o estado quando um input for pressionado
-  // const handleInputChange = (event) => {
-  //   setRespostaSelecionada(event.target.value);
-  // };
-  
   const handleRedirect = () => {
     // Ativar o sinalizador de redirecionamento para mostrar algum indicador de carregamento (opcional).
     setRedirecting(true);
@@ -41,12 +45,11 @@ const TestPage01Desktop: FunctionComponent = () => {
     <div className="testpage01-desktop">
       <div className="test-page3">
         <div className="background-iniciar3">
-        <img
+          <img
             className="rectangle-login-icon3"
             alt=""
-            src="/rectangle-quest.png"
-          />
-        </div >
+            src="/rectangle-quest.png" />
+        </div>
         <img className="logo-padrao-icon8" alt="" src="/logo-padrao1@2x.png" />
         <ol className="text-test3">
           <h2 className="se-sente-empolgado-container">
@@ -60,21 +63,62 @@ const TestPage01Desktop: FunctionComponent = () => {
             </ul>
             <ul className="se-sente-empolgado-com-a-ideia">
               <h4 className="nada-empolgado">
-                <label><input type="radio" value="nadaEmplogado" name="resposta1"checked={respostaSelecionada === 'nadaEmplogado'}
-                /> Nada Empolgado</label>
+                <label>
+                  <input
+                    type="radio"
+                    value="nadaEmpolgado"
+                    name="resposta1"
+                    checked={respostaSelecionada === "nadaEmpolgado" &&
+                      indicePerguntaSelecionada === 0}
+                    onChange={(event) => handleInputChange(event, 1)} />
+                  Nada Empolgado
+                </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label><input type="radio" value="poucoEmplogado" name="resposta1" checked={respostaSelecionada === 'poucoEmplogado'}
-                  /> Pouco Empolgado</label>
+                <label>
+                  <input
+                    type="radio"
+                    value="poucoEmpolgado"
+                    name="resposta1"
+                    checked={respostaSelecionada === "poucoEmpolgado" &&
+                      indicePerguntaSelecionada === 0}
+                    onChange={(event) => handleInputChange(event, 2)} />{" "}
+                  Pouco Empolgado
+                </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label><input type="radio" value="neutro" name="resposta1"/> Neutro</label>
+                <label>
+                  <input
+                    type="radio"
+                    value="neutro"
+                    name="resposta1"
+                    checked={respostaSelecionada === "neutro" &&
+                      indicePerguntaSelecionada === 0}
+                    onChange={(event) => handleInputChange(event, 3)} /> Neutro
+                </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label><input type="radio" value="empolgado" name="resposta1"/> Empolgado</label>
+                <label>
+                  <input
+                    type="radio"
+                    value="empolgado"
+                    name="resposta1"
+                    checked={respostaSelecionada === "empolgado" &&
+                      indicePerguntaSelecionada === 0}
+                    onChange={(event) => handleInputChange(event, 4)} />{" "} Empolgado
+                </label>
               </h4>
               <h4>
-                <label><input type="radio" value="muitoEmplogado" name="resposta1"/> Muito Empolgado</label>
+                <label>
+                  <input
+                    type="radio"
+                    value="muitoEmplogado"
+                    name="resposta1"
+                    checked={respostaSelecionada === "empolgado" &&
+                      indicePerguntaSelecionada === 0}
+                    onChange={(event) => handleInputChange(event, 5)} />{" "}
+                  Muito Empolgado
+                </label>
               </h4>
             </ul>
           </h2>
@@ -89,19 +133,42 @@ const TestPage01Desktop: FunctionComponent = () => {
             </ul>
             <ul className="se-sente-empolgado-com-a-ideia">
               <h4 className="nada-empolgado">
-              <label><input type="radio" value="nadaInteressado" name="resposta2"/> Nada interessado</label>
+                <label>
+                  <input
+                    type="radio"
+                    value="nadaInteressado"
+                    name="resposta2" />{" "}
+                  Nada interessado
+                </label>
               </h4>
               <h4 className="nada-empolgado">
-              <label><input type="radio" value="poucoInteressado" name="resposta2"/> Pouco interessado</label>
+                <label>
+                  <input
+                    type="radio"
+                    value="poucoInteressado"
+                    name="resposta2" />{" "}
+                  Pouco interessado
+                </label>
               </h4>
               <h4 className="nada-empolgado">
-              <label><input type="radio" value="neutro" name="resposta2"/> Neutro</label>
+                <label>
+                  <input type="radio" value="neutro" name="resposta2" /> Neutro
+                </label>
               </h4>
               <h4 className="nada-empolgado">
-              <label><input type="radio" value="Interessado" name="resposta2"/> Interessado</label>
+                <label>
+                  <input type="radio" value="Interessado" name="resposta2" />{" "}
+                  Interessado
+                </label>
               </h4>
               <h4>
-              <label><input type="radio" value="muitoInteressado" name="resposta2"/> Muito interessado</label>
+                <label>
+                  <input
+                    type="radio"
+                    value="muitoInteressado"
+                    name="resposta2" />{" "}
+                  Muito interessado
+                </label>
               </h4>
             </ul>
           </div>
@@ -116,19 +183,33 @@ const TestPage01Desktop: FunctionComponent = () => {
             </ul>
             <ul className="se-sente-empolgado-com-a-ideia">
               <h4 className="nada-empolgado">
-              <label><input type="radio" value="nadaAtraido" name="resposta3"/> Nada atraido</label>
+                <label>
+                  <input type="radio" value="nadaAtraido" name="resposta3" />{" "}
+                  Nada atraido
+                </label>
               </h4>
               <h4 className="nada-empolgado">
-              <label><input type="radio" value="poucoAtraido" name="resposta3"/> Pouco atraido</label>
+                <label>
+                  <input type="radio" value="poucoAtraido" name="resposta3" />{" "}
+                  Pouco atraido
+                </label>
               </h4>
               <h4 className="nada-empolgado">
-              <label><input type="radio" value="neutro" name="resposta3"/> Neutro</label>
+                <label>
+                  <input type="radio" value="neutro" name="resposta3" /> Neutro
+                </label>
               </h4>
               <h4 className="nada-empolgado">
-              <label><input type="radio" value="Atraido" name="resposta3"/> Atraido</label>
+                <label>
+                  <input type="radio" value="Atraido" name="resposta3" />{" "}
+                  Atraido
+                </label>
               </h4>
               <h4>
-              <label><input type="radio" value="muitoAtraido" name="resposta3"/> Muito atraido</label>
+                <label>
+                  <input type="radio" value="muitoAtraido" name="resposta3" />{" "}
+                  Muito atraido
+                </label>
               </h4>
             </ul>
           </div>
@@ -143,19 +224,42 @@ const TestPage01Desktop: FunctionComponent = () => {
             </ul>
             <ul className="se-sente-empolgado-com-a-ideia">
               <h4 className="nada-empolgado">
-              <label><input type="radio" value="nadaEmocionante" name="resposta4"/> Nada emocionante</label>
+                <label>
+                  <input
+                    type="radio"
+                    value="nadaEmocionante"
+                    name="resposta4" />{" "}
+                  Nada emocionante
+                </label>
               </h4>
               <h4 className="nada-empolgado">
-              <label><input type="radio" value="poucoEmocionante" name="resposta4"/> Pouco emocionante</label>
+                <label>
+                  <input
+                    type="radio"
+                    value="poucoEmocionante"
+                    name="resposta4" />{" "}
+                  Pouco emocionante
+                </label>
               </h4>
               <h4 className="nada-empolgado">
-              <label><input type="radio" value="neutro" name="resposta4"/> Neutro</label>
+                <label>
+                  <input type="radio" value="neutro" name="resposta4" /> Neutro
+                </label>
               </h4>
               <h4 className="nada-empolgado">
-              <label><input type="radio" value="emocionante" name="resposta4"/> Emocionante</label>
+                <label>
+                  <input type="radio" value="emocionante" name="resposta4" />{" "}
+                  Emocionante
+                </label>
               </h4>
               <h4>
-              <label><input type="radio" value="muitoEmocionante" name="resposta4"/> Muito emocionante</label>
+                <label>
+                  <input
+                    type="radio"
+                    value="muitoEmocionante"
+                    name="resposta4" />{" "}
+                  Muito emocionante
+                </label>
               </h4>
             </ul>
           </div>
@@ -167,32 +271,32 @@ const TestPage01Desktop: FunctionComponent = () => {
           </div>
         </div>
         <Link to="/testpage02">
-            <Button
-              className="boto-continuar"
-              name="Botão Continuar"
-              id="btnContinuar"
-              variant="primary"
-              onClick={handleRedirect}
-              disabled={redirecting}
-            >
-              {redirecting ? "Aguarde..." : "CONTINUAR"}
-            </Button>
+          <Button
+            className="boto-continuar"
+            name="Botão Continuar"
+            id="btnContinuar"
+            variant="primary"
+            onClick={handleRedirect}
+            disabled={redirecting}
+          >
+            {redirecting ? "Aguarde..." : "CONTINUAR"}
+          </Button>
         </Link>
         <Link to="/">
-            <Button
-              className="boto-anterior"
-              name="Botão Anterior"
-              id="btnAnterior"
-              variant="primary"
-              onClick={handleRedirect}
-              disabled={redirecting}
-            >
-              {redirecting ? "Aguarde..." : "⬅"}
-            </Button>
+          <Button
+            className="boto-anterior"
+            name="Botão Anterior"
+            id="btnAnterior"
+            variant="primary"
+            onClick={handleRedirect}
+            disabled={redirecting}
+          >
+            {redirecting ? "Aguarde..." : "⬅"}
+          </Button>
         </Link>
       </div>
     </div>
   );
-};
+}
 
 export default TestPage01Desktop;

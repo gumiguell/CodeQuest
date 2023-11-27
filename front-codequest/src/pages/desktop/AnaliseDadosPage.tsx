@@ -17,6 +17,16 @@ const AnaliseDadosPageDesktop: FunctionComponent = () => {
     }, 5000); // 1000 milissegundos = 1 segundo
   };
 
+  const handleDownload = () => {
+    const fileUrl = process.env.PUBLIC_URL + '/pdf/AnaliseDados.pdf';
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.setAttribute('download', 'AnaliseDados.pdf');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="analisedados-page-desktop">
       <div className="analisedados-page">
@@ -97,29 +107,28 @@ const AnaliseDadosPageDesktop: FunctionComponent = () => {
         </div>
         <div>
           <Link to="/">
-              <Button
-                className="boto-voltar"
-                name="Botão Voltar"
-                id="btnVoltar"
-                variant="primary"
-                onClick={handleRedirect}
-                disabled={redirecting}
-              >
-                {redirecting ? "Aguarde..." : "VOLTAR A TELA INICIAL"}
-              </Button>
+            <Button
+              className="boto-voltar"
+              name="Botão Voltar"
+              id="btnVoltar"
+              variant="primary"
+              onClick={handleRedirect}
+              disabled={redirecting}
+            >
+              {redirecting ? "Aguarde..." : "VOLTAR A TELA INICIAL"}
+            </Button>
           </Link>
-          <Link to="/save">
-              <Button
-                className="botao-salvar-teste"
-                name="Botão Salvar"
-                id="btnSalvar"
-                variant="primary"
-                onClick={handleRedirect}
-                disabled={redirecting}
-              >
-                {redirecting ? "Aguarde..." : "SALVAR TESTE"}
-              </Button>
-          </Link>
+
+          <Button
+            className="botao-salvar-teste"
+            name="Botão Salvar"
+            id="btnSalvar"
+            variant="primary"
+            onClick={handleDownload}
+            disabled={redirecting}
+          >
+            {redirecting ? "Aguarde..." : "BAIXAR TESTE"}
+          </Button>
         </div>
         <div className="money-text">
           <img className="money" alt="" src="/money.svg" />

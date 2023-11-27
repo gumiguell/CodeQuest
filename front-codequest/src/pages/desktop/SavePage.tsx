@@ -12,18 +12,39 @@ const SavePageDesktop: FunctionComponent = () => {
     setEmail(e.target.value);
   };
 
-  const handleRedirect = () => {
+  const handleRedirect = async () => {
     if (email) {
-      // Faça algo com o email, por exemplo, enviar para o servidor
-      // Em seguida, redirecione de volta à homepage
       setRedirecting(true);
-      setTimeout(() => {
+  
+      try {
+        const response = await fetch('http://localhost:3306/emails/incluir', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }), // Envie o email digitado pelo usuário para o backend
+        });
+  
+        if (response.ok) {
+          // Se a resposta do servidor foi bem-sucedida, redirecione para a homepage ou faça outra ação necessária
+          setTimeout(() => {
+            setRedirecting(false);
+            // Realize o redirecionamento aqui, por exemplo:
+            // history.push("/");
+          }, 1000);
+        } else {
+          // Trate a falha na requisição
+          console.error('Falha ao enviar e-mail');
+          setRedirecting(false);
+        }
+      } catch (error) {
+        // Trate erros de rede ou outros erros
+        console.error('Erro ao enviar e-mail:', error);
         setRedirecting(false);
-        // Realize o redirecionamento aqui, por exemplo:
-        // history.push("/");
-      }, 1000);
+      }
     }
   };
+  
 
 
   return (

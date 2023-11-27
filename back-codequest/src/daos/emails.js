@@ -22,7 +22,7 @@ async function atualize(email) {
         return null;
     
     try {
-        const sql = 'UPDATE email SET email=? WHERE id=?';
+        const sql = 'UPDATE emails SET email=? WHERE id=?';
         const dados = [email.email, email.id];
         await conexao.query(sql, dados);
         return true;
@@ -41,7 +41,7 @@ async function remova(id) {
         const dados = [id];
         await conexao.query(sql, dados);
         return true;
-    } catch(exececao) {
+    } catch(excecao) {
         return false;
     }
 }
@@ -55,7 +55,6 @@ async function recupereUm(id) {
         const sql = 'SELECT * FROM emails WHERE id=?';
         const dados = [id];
         const [linhas] = await conexao.execute(sql, dados);
-        await conexao.query(sql, dados);
         return linhas;
     } catch(excecao) {
         return false;

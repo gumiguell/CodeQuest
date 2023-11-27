@@ -3,7 +3,6 @@ import "./DesSoftwarePage.css";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
-import SavePageDesktop from "./SavePage";
 
 const DesSoftwarePageDesktop: FunctionComponent = () => {
   const [redirecting, setRedirecting] = useState(false);
@@ -16,6 +15,16 @@ const DesSoftwarePageDesktop: FunctionComponent = () => {
       setRedirecting(false);
       setShowPopup(true); // Mostrar o popup após o tempo de espera
     }, 5000);
+  };
+
+  const handleDownload = () => {
+    const fileUrl = process.env.PUBLIC_URL + "/pdf/DesSoftware.pdf";
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.setAttribute("download", "DesSoftware.pdf");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -125,21 +134,17 @@ const DesSoftwarePageDesktop: FunctionComponent = () => {
               {redirecting ? "Aguarde..." : "VOLTAR A TELA INICIAL"}
             </Button>
           </Link>
-          <Link to="/save">
-            <Button
-              className="botao-salvar-teste"
-              name="Botão Salvar"
-              id="btnSalvar"
-              variant="primary"
-              onClick={() => setShowPopup(true)} // Mostrar o popup ao clicar no botão "Salvar Teste"
-              disabled={redirecting}
-            >
-              {redirecting ? "Aguarde..." : "SALVAR TESTE"}
-            </Button>
-          </Link>
 
-          {/* Popup */}
-          {showPopup && <SavePageDesktop />}
+          <Button
+            className="botao-salvar-teste"
+            name="Botão Salvar"
+            id="btnSalvar"
+            variant="primary"
+            onClick={handleDownload}
+            disabled={redirecting}
+          >
+            {redirecting ? "Aguarde..." : "BAIXAR TESTE"}
+          </Button>
         </div>
         <img
           className="image-software-icon"

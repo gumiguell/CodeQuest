@@ -85,8 +85,9 @@ function App() {
         title = "";
         metaDescription = "";
         break;
-      case "/errorpage":
+      case "/error-page":
         title = "";
+        metaDescription = "";
         break;
     }
 
@@ -105,19 +106,18 @@ function App() {
   }, [pathname]);
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/testpage01" element={<TestPage01 />} />
-      <Route path="/testpage02" element={<TestPage02 />} />
-      <Route path="/testpage03" element={<TestPage03 />} />
-      <Route path="/testpage04" element={<TestPage04 />} />
-      <Route path="/testpage05" element={<TestPage05 />} />
-      <Route path="/dessoftware" element={<DesSoftwarePage />} />
-      <Route path="/analisedados" element={<AnaliseDadosPage />} />
-      <Route path="/desweb" element={<DesWebPage />} />
-      <Route path="/desaplicativos" element={<DesAplicativosPage />} />
-      <Route path="/segti" element={<SegTiPage />} />
-      <Route path="/save" element={<SavePage />} /> 
-      <Route path="error" element={<ErrorPage />} />*/
+      <Route path="/" element={<HomePage />} errorElement={<ErrorPage />}/>
+      <Route path="/testpage01" element={<TestPage01 />} errorElement={<ErrorPage />}/>
+      <Route path="/testpage02" element={<TestPage02 />} errorElement={<ErrorPage />}/>
+      <Route path="/testpage03" element={<TestPage03 />} errorElement={<ErrorPage />}/>
+      <Route path="/testpage04" element={<TestPage04 />} errorElement={<ErrorPage />}/>
+      <Route path="/testpage05" element={<TestPage05 />} errorElement={<ErrorPage />}/>
+      <Route path="/dessoftware" element={<DesSoftwarePage />} errorElement={<ErrorPage />}/>
+      <Route path="/analisedados" element={<AnaliseDadosPage />} errorElement={<ErrorPage />}/>
+      <Route path="/desweb" element={<DesWebPage />} errorElement={<ErrorPage />}/>
+      <Route path="/desaplicativos" element={<DesAplicativosPage />} errorElement={<ErrorPage />}/>
+      <Route path="/segti" element={<SegTiPage />} errorElement={<ErrorPage />}/>
+      <Route path="/save" element={<SavePage />} errorElement={<ErrorPage />}/> */
     </Routes>
   );
 }

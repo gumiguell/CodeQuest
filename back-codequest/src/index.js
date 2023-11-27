@@ -1,5 +1,6 @@
 const bd = require('./core/bd.js');
 const rotas = require('./core/rotas.js');
+const cors = require('cors')
 
 function middleWareGlobal(req, res, next) {
     console.time('Duração');
@@ -28,9 +29,10 @@ async function ativacaoDoServidor() {
     const app = express();
 
     app.use(express.json());
+    app.use(cors())
     app.use(middleWareGlobal);
 
-    app.post('/emails', rotas.inclusao);
+    app.post('/emails/incluir', rotas.inclusao);
     app.put('/emails/:id', rotas.atualizacao);
     app.delete('/emails/:id', rotas.remocao);
     app.get('/emails/:id', rotas.recuperacaoDeUm);
