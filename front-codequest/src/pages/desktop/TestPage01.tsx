@@ -4,33 +4,9 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-interface RespostaMatriz {
-  [indicePergunta: number]: string[];
-}
 
-let resp: any[][] = [[]];
-export const retResp = () => {
-  return resp;
-}
 const TestPage01Desktop: FunctionComponent = () => {
   const [redirecting, setRedirecting] = useState(false);
-  const [resps, setResps] = useState<any[]>([]);  
-  const [respostaSelecionada, setRespostaSelecionada] = useState(null);
-  const [indicePerguntaSelecionada, setIndicePerguntaSelecionada] = useState(null);
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, indicePergunta: number) => {
-    const novaResposta = event.target.value;
-
-    if (!resp[indicePergunta]) {
-      resp[indicePergunta] = [];
-    }
-
-    resp[indicePergunta].push(novaResposta);
-  };
-
-  const obterIndicePerguntaComRespostaSelecionada = () => {
-    return indicePerguntaSelecionada;
-  };
-
   const handleRedirect = () => {
     // Ativar o sinalizador de redirecionamento para mostrar algum indicador de carregamento (opcional).
     setRedirecting(true);
@@ -66,11 +42,9 @@ const TestPage01Desktop: FunctionComponent = () => {
                 <label>
                   <input
                     type="radio"
-                    value="nadaEmpolgado"
+                    value="1"
                     name="resposta1"
-                    checked={respostaSelecionada === "nadaEmpolgado" &&
-                      indicePerguntaSelecionada === 0}
-                    onChange={(event) => handleInputChange(event, 1)} />
+                     />
                   Nada Empolgado
                 </label>
               </h4>
@@ -80,9 +54,7 @@ const TestPage01Desktop: FunctionComponent = () => {
                     type="radio"
                     value="poucoEmpolgado"
                     name="resposta1"
-                    checked={respostaSelecionada === "poucoEmpolgado" &&
-                      indicePerguntaSelecionada === 0}
-                    onChange={(event) => handleInputChange(event, 2)} />{" "}
+                     />{" "}
                   Pouco Empolgado
                 </label>
               </h4>
@@ -92,9 +64,7 @@ const TestPage01Desktop: FunctionComponent = () => {
                     type="radio"
                     value="neutro"
                     name="resposta1"
-                    checked={respostaSelecionada === "neutro" &&
-                      indicePerguntaSelecionada === 0}
-                    onChange={(event) => handleInputChange(event, 3)} /> Neutro
+                     /> Neutro
                 </label>
               </h4>
               <h4 className="nada-empolgado">
@@ -103,9 +73,7 @@ const TestPage01Desktop: FunctionComponent = () => {
                     type="radio"
                     value="empolgado"
                     name="resposta1"
-                    checked={respostaSelecionada === "empolgado" &&
-                      indicePerguntaSelecionada === 0}
-                    onChange={(event) => handleInputChange(event, 4)} />{" "} Empolgado
+                     />{" "} Empolgado
                 </label>
               </h4>
               <h4>
@@ -114,9 +82,7 @@ const TestPage01Desktop: FunctionComponent = () => {
                     type="radio"
                     value="muitoEmplogado"
                     name="resposta1"
-                    checked={respostaSelecionada === "empolgado" &&
-                      indicePerguntaSelecionada === 0}
-                    onChange={(event) => handleInputChange(event, 5)} />{" "}
+                     />{" "}
                   Muito Empolgado
                 </label>
               </h4>
@@ -291,7 +257,7 @@ const TestPage01Desktop: FunctionComponent = () => {
             onClick={handleRedirect}
             disabled={redirecting}
           >
-            {redirecting ? "Aguarde..." : "⬅"}
+            {redirecting ? "Aguarde..." : <img src="/arrow.svg" alt="Seta" />}
           </Button>
         </Link>
       </div>

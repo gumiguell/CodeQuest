@@ -15,7 +15,6 @@ const ErrorPage = () => {
 }
 
 export default ErrorPage;
-
 // import { FunctionComponent } from "react";
 // import "./DesWebPage.css";
 // import { Link } from 'react-router-dom';
