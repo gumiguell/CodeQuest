@@ -1,20 +1,47 @@
 import { FunctionComponent, SetStateAction } from "react";
+import React, { useState, useEffect } from 'react';
 import "./TestPage01.css";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 
+import { Link } from 'react-router-dom';
+import handleInputChange from '../../handleResp';
+import respostasData from '../../respostasData';
 
+//import respostasData, { Resposta } from '../../respostasData';
 const TestPage01Desktop: FunctionComponent = () => {
+
+  const respostasAnterioresString = localStorage.getItem('respostas');
+  const respostasAnteriores = respostasAnterioresString ? JSON.parse(respostasAnterioresString) : {};
+  const [respostas, setRespostas] = useState(respostasAnteriores);
+  const [redirecionando, setRedirecionando] = useState(false);
+
+  const handleInputChangeWrapper = (pergunta: number, valor: number) => {
+    const updatedRespostas = { ...respostas, [pergunta]: valor };
+    setRespostas(updatedRespostas);
+  };
+
+  const handleRedirecionar = () => {
+    localStorage.setItem('respostas', JSON.stringify(respostas));
+
+    setRedirecionando(true);
+    setTimeout(() => {
+      setRedirecionando(false);
+    }, 5000);
+  };
+
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem('respostas');
+    };
+  }, []);
+
+
   const [redirecting, setRedirecting] = useState(false);
   const handleRedirect = () => {
-    // Ativar o sinalizador de redirecionamento para mostrar algum indicador de carregamento (opcional).
     setRedirecting(true);
-
-    // Atraso de 1000 milissegundos (1 segundo) antes do redirecionamento.
     setTimeout(() => {
-      setRedirecting(false); // Desativar o sinalizador de redirecionamento.
-    }, 5000); // 1000 milissegundos = 1 segundo
+      setRedirecting(false); 
+    }, 5000); 
   };
 
   return (
@@ -42,9 +69,11 @@ const TestPage01Desktop: FunctionComponent = () => {
                 <label>
                   <input
                     type="radio"
-                    value="1"
+                    value={1}
                     name="resposta1"
-                     />
+                    onChange={() => handleInputChangeWrapper(1, 1)}
+                    checked={respostas[1] === 1}
+                     />{" "}
                   Nada Empolgado
                 </label>
               </h4>
@@ -52,8 +81,10 @@ const TestPage01Desktop: FunctionComponent = () => {
                 <label>
                   <input
                     type="radio"
-                    value="poucoEmpolgado"
+                    value={2}
                     name="resposta1"
+                    onChange={() => handleInputChangeWrapper(1, 1)}
+                    checked={respostas[1] === 1}
                      />{" "}
                   Pouco Empolgado
                 </label>
@@ -62,8 +93,10 @@ const TestPage01Desktop: FunctionComponent = () => {
                 <label>
                   <input
                     type="radio"
-                    value="neutro"
+                    value={3}
                     name="resposta1"
+                    onChange={() => handleInputChangeWrapper(1, 1)}
+                    checked={respostas[1] === 1}
                      /> Neutro
                 </label>
               </h4>
@@ -71,8 +104,9 @@ const TestPage01Desktop: FunctionComponent = () => {
                 <label>
                   <input
                     type="radio"
-                    value="empolgado"
+                    value={4}
                     name="resposta1"
+                    onChange={() => handleInputChange({pergunta: 1, valor: 4, respostas, setRespostas})}
                      />{" "} Empolgado
                 </label>
               </h4>
@@ -80,8 +114,9 @@ const TestPage01Desktop: FunctionComponent = () => {
                 <label>
                   <input
                     type="radio"
-                    value="muitoEmplogado"
+                    value={5}
                     name="resposta1"
+                    onChange={() => handleInputChange({pergunta: 1, valor: 5, respostas, setRespostas})}
                      />{" "}
                   Muito Empolgado
                 </label>
