@@ -3,10 +3,36 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
 import "./TestPage03.css";
 import { Link } from 'react-router-dom';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const TestPage03Desktop: FunctionComponent = () => {
   const [redirecting, setRedirecting] = useState(false);
+  const [respostas, setRespostas] = useState({
+    resposta1: "",
+    resposta2: "",
+    resposta3: "",
+    resposta4: "",
+  });
+
+  useEffect(() => {
+    // Carregar respostas salvas quando o componente monta
+    const savedRespostas = localStorage.getItem("respostas");
+    if (savedRespostas) {
+      setRespostas(JSON.parse(savedRespostas));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Salvar respostas no localStorage sempre que elas mudam
+    localStorage.setItem("respostas", JSON.stringify(respostas));
+  }, [respostas]);
+  
+  const handleRespostaChange = (pergunta: string, resposta: string) => {
+    setRespostas((prevRespostas) => ({
+      ...prevRespostas,
+      [pergunta]: resposta,
+    }));
+  };
 
   const handleRedirect = () => {
     // Ativar o sinalizador de redirecionamento para mostrar algum indicador de carregamento (opcional).
@@ -167,7 +193,7 @@ const TestPage03Desktop: FunctionComponent = () => {
               onClick={handleRedirect}
               disabled={redirecting}
             >
-              {redirecting ? "Aguarde..." : "⬅"}
+              {redirecting ? "Aguarde..." : <img src="/arrow.svg" alt="Seta" />}
             </Button>
         </Link>
       </div>

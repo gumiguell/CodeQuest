@@ -2,41 +2,39 @@ import { FunctionComponent, SetStateAction } from "react";
 import React, { useState, useEffect } from 'react';
 import "./TestPage01.css";
 import { Button } from "react-bootstrap";
-
 import { Link } from 'react-router-dom';
 import handleInputChange from '../../handleResp';
 import respostasData from '../../respostasData';
 
-//import respostasData, { Resposta } from '../../respostasData';
 const TestPage01Desktop: FunctionComponent = () => {
-
-  const respostasAnterioresString = localStorage.getItem('respostas');
-  const respostasAnteriores = respostasAnterioresString ? JSON.parse(respostasAnterioresString) : {};
-  const [respostas, setRespostas] = useState(respostasAnteriores);
-  const [redirecionando, setRedirecionando] = useState(false);
-
-  const handleInputChangeWrapper = (pergunta: number, valor: number) => {
-    const updatedRespostas = { ...respostas, [pergunta]: valor };
-    setRespostas(updatedRespostas);
-  };
-
-  const handleRedirecionar = () => {
-    localStorage.setItem('respostas', JSON.stringify(respostas));
-
-    setRedirecionando(true);
-    setTimeout(() => {
-      setRedirecionando(false);
-    }, 5000);
-  };
+  const [redirecting, setRedirecting] = useState(false);
+  const [respostas, setRespostas] = useState({
+    resposta1: "",
+    resposta2: "",
+    resposta3: "",
+    resposta4: "",
+  });
 
   useEffect(() => {
-    return () => {
-      localStorage.removeItem('respostas');
-    };
+    // Carregar respostas salvas quando o componente monta
+    const savedRespostas = localStorage.getItem("respostas");
+    if (savedRespostas) {
+      setRespostas(JSON.parse(savedRespostas));
+    }
   }, []);
 
+  useEffect(() => {
+    // Salvar respostas no localStorage sempre que elas mudam
+    localStorage.setItem("respostas", JSON.stringify(respostas));
+  }, [respostas]);
+  
+  const handleRespostaChange = (pergunta: string, resposta: string) => {
+    setRespostas((prevRespostas) => ({
+      ...prevRespostas,
+      [pergunta]: resposta,
+    }));
+  };
 
-  const [redirecting, setRedirecting] = useState(false);
   const handleRedirect = () => {
     setRedirecting(true);
     setTimeout(() => {
@@ -66,59 +64,58 @@ const TestPage01Desktop: FunctionComponent = () => {
             </ul>
             <ul className="se-sente-empolgado-com-a-ideia">
               <h4 className="nada-empolgado">
-                <label>
-                  <input
-                    type="radio"
-                    value={1}
-                    name="resposta1"
-                    onChange={() => handleInputChangeWrapper(1, 1)}
-                    checked={respostas[1] === 1}
-                     />{" "}
-                  Nada Empolgado
+              <label><input 
+                  type="radio" 
+                  value="nadaEmpolgado" 
+                  name="resposta1"
+                  checked={respostas.resposta1 === "nadaEmpolgado"}
+                  onChange={() => handleRespostaChange("resposta1", "nadaEmpolgado")}
+                  />{" "}
+                   Nada Empolgado
                 </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label>
-                  <input
-                    type="radio"
-                    value={2}
-                    name="resposta1"
-                    onChange={() => handleInputChangeWrapper(1, 1)}
-                    checked={respostas[1] === 1}
-                     />{" "}
-                  Pouco Empolgado
+              <label><input 
+                  type="radio" 
+                  value="poucoEmpolgado" 
+                  name="resposta1"
+                  checked={respostas.resposta1 === "poucoEmpolgado"}
+                  onChange={() => handleRespostaChange("resposta1", "poucoEmpolgado")}
+                  />{" "}
+                   Pouco Empolgado
                 </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label>
-                  <input
-                    type="radio"
-                    value={3}
-                    name="resposta1"
-                    onChange={() => handleInputChangeWrapper(1, 1)}
-                    checked={respostas[1] === 1}
-                     /> Neutro
+              <label><input 
+                  type="radio" 
+                  value="neutro" 
+                  name="resposta1"
+                  checked={respostas.resposta1 === "neutro"}
+                  onChange={() => handleRespostaChange("resposta1", "neutro")}
+                  />{" "}
+                   Neutro
                 </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label>
-                  <input
-                    type="radio"
-                    value={4}
-                    name="resposta1"
-                    onChange={() => handleInputChange({pergunta: 1, valor: 4, respostas, setRespostas})}
-                     />{" "} Empolgado
+              <label><input 
+                  type="radio" 
+                  value="empolgado" 
+                  name="resposta1"
+                  checked={respostas.resposta1 === "empolgado"}
+                  onChange={() => handleRespostaChange("resposta1", "empolgado")}
+                  />{" "}
+                   Empolgado
                 </label>
               </h4>
               <h4>
-                <label>
-                  <input
-                    type="radio"
-                    value={5}
-                    name="resposta1"
-                    onChange={() => handleInputChange({pergunta: 1, valor: 5, respostas, setRespostas})}
-                     />{" "}
-                  Muito Empolgado
+              <label><input 
+                  type="radio" 
+                  value="muitoEmpolgado" 
+                  name="resposta1"
+                  checked={respostas.resposta1 === "muitoEmpolgado"}
+                  onChange={() => handleRespostaChange("resposta1", "muitoEmpolgado")}
+                  />{" "}
+                   Muito Empolgado
                 </label>
               </h4>
             </ul>
@@ -134,41 +131,58 @@ const TestPage01Desktop: FunctionComponent = () => {
             </ul>
             <ul className="se-sente-empolgado-com-a-ideia">
               <h4 className="nada-empolgado">
-                <label>
-                  <input
-                    type="radio"
-                    value="nadaInteressado"
-                    name="resposta2" />{" "}
-                  Nada interessado
+              <label><input 
+                  type="radio" 
+                  value="nadaInteressado" 
+                  name="resposta2"
+                  checked={respostas.resposta2 === "nadaInteressado"}
+                  onChange={() => handleRespostaChange("resposta2", "nadaInteressado")}
+                  />{" "}
+                   Nada interessado
                 </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label>
-                  <input
-                    type="radio"
-                    value="poucoInteressado"
-                    name="resposta2" />{" "}
-                  Pouco interessado
+              <label><input 
+                  type="radio" 
+                  value="poucoInteressado" 
+                  name="resposta2"
+                  checked={respostas.resposta2 === "poucoInteressado"}
+                  onChange={() => handleRespostaChange("resposta2", "poucoInteressado")}
+                  />{" "}
+                   Pouco interessado
                 </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label>
-                  <input type="radio" value="neutro" name="resposta2" /> Neutro
+              <label><input 
+                  type="radio" 
+                  value="neutro" 
+                  name="resposta2"
+                  checked={respostas.resposta2 === "neutro"}
+                  onChange={() => handleRespostaChange("resposta2", "neutro")}
+                  />{" "}
+                   Neutro
                 </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label>
-                  <input type="radio" value="Interessado" name="resposta2" />{" "}
-                  Interessado
+              <label><input 
+                  type="radio" 
+                  value="interessado" 
+                  name="resposta2"
+                  checked={respostas.resposta2 === "interessado"}
+                  onChange={() => handleRespostaChange("resposta2", "interessado")}
+                  />{" "}
+                   Neutro
                 </label>
               </h4>
               <h4>
-                <label>
-                  <input
-                    type="radio"
-                    value="muitoInteressado"
-                    name="resposta2" />{" "}
-                  Muito interessado
+              <label><input 
+                  type="radio" 
+                  value="muitoInteressado" 
+                  name="resposta2"
+                  checked={respostas.resposta2 === "muitoInteressado"}
+                  onChange={() => handleRespostaChange("resposta2", "muitoInteressado")}
+                  />{" "}
+                   Muito Interessado
                 </label>
               </h4>
             </ul>
@@ -184,32 +198,58 @@ const TestPage01Desktop: FunctionComponent = () => {
             </ul>
             <ul className="se-sente-empolgado-com-a-ideia">
               <h4 className="nada-empolgado">
-                <label>
-                  <input type="radio" value="nadaAtraido" name="resposta3" />{" "}
-                  Nada atraido
+              <label><input 
+                  type="radio" 
+                  value="nadaAtraido" 
+                  name="resposta3"
+                  checked={respostas.resposta3 === "nadaAtraido"}
+                  onChange={() => handleRespostaChange("resposta3", "nadaAtraido")}
+                  />{" "}
+                   Nada atraido
                 </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label>
-                  <input type="radio" value="poucoAtraido" name="resposta3" />{" "}
-                  Pouco atraido
+              <label><input 
+                  type="radio" 
+                  value="poucoAtraido" 
+                  name="resposta3"
+                  checked={respostas.resposta3 === "poucoAtraido"}
+                  onChange={() => handleRespostaChange("resposta3", "poucoAtraido")}
+                  />{" "}
+                   Pouco atraido
                 </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label>
-                  <input type="radio" value="neutro" name="resposta3" /> Neutro
+              <label><input 
+                  type="radio" 
+                  value="neutro" 
+                  name="resposta3"
+                  checked={respostas.resposta3 === "neutro"}
+                  onChange={() => handleRespostaChange("resposta3", "neutro")}
+                  />{" "}
+                   Neutro
                 </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label>
-                  <input type="radio" value="Atraido" name="resposta3" />{" "}
-                  Atraido
+              <label><input 
+                  type="radio" 
+                  value="atraido" 
+                  name="resposta3"
+                  checked={respostas.resposta3 === "atraido"}
+                  onChange={() => handleRespostaChange("resposta3", "atraido")}
+                  />{" "}
+                   Atraido
                 </label>
               </h4>
               <h4>
-                <label>
-                  <input type="radio" value="muitoAtraido" name="resposta3" />{" "}
-                  Muito atraido
+              <label><input 
+                  type="radio" 
+                  value="muitoAtraido" 
+                  name="resposta3"
+                  checked={respostas.resposta3 === "muitoAtraido"}
+                  onChange={() => handleRespostaChange("resposta3", "muitoAtraido")}
+                  />{" "}
+                   Muito Atraido
                 </label>
               </h4>
             </ul>
@@ -225,41 +265,58 @@ const TestPage01Desktop: FunctionComponent = () => {
             </ul>
             <ul className="se-sente-empolgado-com-a-ideia">
               <h4 className="nada-empolgado">
-                <label>
-                  <input
-                    type="radio"
-                    value="nadaEmocionante"
-                    name="resposta4" />{" "}
-                  Nada emocionante
+              <label><input 
+                  type="radio" 
+                  value="nadaEmocionante" 
+                  name="resposta4"
+                  checked={respostas.resposta4 === "nadaEmocionante"}
+                  onChange={() => handleRespostaChange("resposta4", "nadaEmocionante")}
+                  />{" "}
+                   Nada emocionante
                 </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label>
-                  <input
-                    type="radio"
-                    value="poucoEmocionante"
-                    name="resposta4" />{" "}
-                  Pouco emocionante
+              <label><input 
+                  type="radio" 
+                  value="poucoEmocionante" 
+                  name="resposta4"
+                  checked={respostas.resposta4 === "poucoEmocionante"}
+                  onChange={() => handleRespostaChange("resposta4", "poucoEmocionante")}
+                  />{" "}
+                   Pouco emocionante
                 </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label>
-                  <input type="radio" value="neutro" name="resposta4" /> Neutro
+              <label><input 
+                  type="radio" 
+                  value="neutro" 
+                  name="resposta4"
+                  checked={respostas.resposta4 === "neutro"}
+                  onChange={() => handleRespostaChange("resposta4", "neutro")}
+                  />{" "}
+                   Neutro
                 </label>
               </h4>
               <h4 className="nada-empolgado">
-                <label>
-                  <input type="radio" value="emocionante" name="resposta4" />{" "}
-                  Emocionante
+              <label><input 
+                  type="radio" 
+                  value="emocionante" 
+                  name="resposta4"
+                  checked={respostas.resposta4 === "emocionante"}
+                  onChange={() => handleRespostaChange("resposta4", "emocionante")}
+                  />{" "}
+                   Emocionante
                 </label>
               </h4>
               <h4>
-                <label>
-                  <input
-                    type="radio"
-                    value="muitoEmocionante"
-                    name="resposta4" />{" "}
-                  Muito emocionante
+              <label><input 
+                  type="radio" 
+                  value="muitoEmocionante" 
+                  name="resposta4"
+                  checked={respostas.resposta4 === "muitoEmocionante"}
+                  onChange={() => handleRespostaChange("resposta4", "muitoEmocionante")}
+                  />{" "}
+                   Muito Emocionante
                 </label>
               </h4>
             </ul>
