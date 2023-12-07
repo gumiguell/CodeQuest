@@ -107,14 +107,15 @@ const TestPage01Desktop: FunctionComponent = () => {
                    Empolgado
                 </label>
               </h4>
-              <h4>
-                <label>
-                  <input
-                    type="radio"
-                    value="muitoEmplogado"
-                    name="resposta1"
-                     />{" "}
-                  Muito Empolgado
+              <h4 className="nada-empolgado">
+              <label><input 
+                  type="radio" 
+                  value="muitoEmpolgado" 
+                  name="resposta1"
+                  checked={respostas.resposta1 === "muitoEmpolgado"}
+                  onChange={() => handleRespostaChange("resposta1", "muitoEmpolgado")}
+                  />{" "}
+                   Muito Empolgado
                 </label>
               </h4>
             </ul>
