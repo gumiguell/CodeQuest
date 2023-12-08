@@ -4,8 +4,13 @@ import { Button } from "react-bootstrap";
 import "./TestPage02.css";
 import { Link } from 'react-router-dom';
 import { useState } from "react";
+import React from "react";
 
-const TestPage02Desktop: FunctionComponent = () => {
+interface TestPage02DesktopProps {
+  onRespostasChange: (respostas: { resposta1: string; resposta2: string; resposta3: string; resposta4: string; }) => void;
+}
+
+const TestPage02Desktop: FunctionComponent<TestPage02DesktopProps> = ({ onRespostasChange }) => {
   const [redirecting, setRedirecting] = useState(false);
   const [respostas, setRespostas] = useState({
     resposta1: "",
@@ -13,7 +18,9 @@ const TestPage02Desktop: FunctionComponent = () => {
     resposta3: "",
     resposta4: "",
   });
-
+  React.useEffect(() => {
+    onRespostasChange(respostas);
+  }, [onRespostasChange, respostas]);
   useEffect(() => {
     // Carregar respostas salvas quando o componente monta
     const savedRespostas = localStorage.getItem("respostas");
@@ -21,7 +28,7 @@ const TestPage02Desktop: FunctionComponent = () => {
       setRespostas(JSON.parse(savedRespostas));
     }
   }, []);
-
+  
   useEffect(() => {
     // Salvar respostas no localStorage sempre que elas mudam
     localStorage.setItem("respostas", JSON.stringify(respostas));
@@ -34,10 +41,8 @@ const TestPage02Desktop: FunctionComponent = () => {
     }));
   };
 
-  const handleRedirect = () => {
-  
+  const handleRedirect = () => {  
     setRedirecting(true);
-
     setTimeout(() => {
       setRedirecting(false); 
     }, 5000); 
@@ -55,8 +60,8 @@ const TestPage02Desktop: FunctionComponent = () => {
           />
         </div>
         <img className="logo-padrao-icon6" alt="" src="/logo-padrao1@2x.png" />
-        <div className="text-test2">
-          <div className="acha-bacana-a-container">
+        <ol className="text-test2">
+          <h2 className="acha-bacana-a-container">
             <ul className="acha-bacana-a-ideia-de-criar-a">
               <h3 className="nada-bacana">
                 <b>
@@ -122,7 +127,7 @@ const TestPage02Desktop: FunctionComponent = () => {
                 </label>
               </h4>
             </ul>
-          </div>
+          </h2>
           <div className="imagina-se-aprendendo-a-container">
             <ul className="acha-bacana-a-ideia-de-criar-a">
               <h3 className="nada-bacana">
@@ -325,7 +330,7 @@ const TestPage02Desktop: FunctionComponent = () => {
               </h4>
             </ul>
           </div>
-        </div>
+        </ol>
         <div className="title-test3">
           <div className="rectangle-div" />
           <div className="em-uma-escala3">

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from "react-responsive";
 import { mediaQueries } from "./responsive";
 import { render } from "react-dom";
-import { useEffect } from "react";
+
 import {
   Routes,
   Route,
@@ -29,6 +29,12 @@ function App() {
   const action = useNavigationType();
   const location = useLocation();
   const pathname = location.pathname;
+
+  const [respostasPorPagina, setRespostasPorPagina] = useState<Array<{ resposta1: string; resposta2: string; resposta3: string; resposta4: string; }>>([]);
+
+  const handleRespostasChange = (respostas: { resposta1: string; resposta2: string; resposta3: string; resposta4: string; }) => {
+    setRespostasPorPagina(prevRespostas => [...prevRespostas, respostas]);
+  };
 
   useEffect(() => {
     if (action !== "POP") {
@@ -107,11 +113,11 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} errorElement={<ErrorPage />}/>
-      <Route path="/testpage01" element={<TestPage01 />} errorElement={<ErrorPage />}/>
-      <Route path="/testpage02" element={<TestPage02 />} errorElement={<ErrorPage />}/>
-      <Route path="/testpage03" element={<TestPage03 />} errorElement={<ErrorPage />}/>
-      <Route path="/testpage04" element={<TestPage04 />} errorElement={<ErrorPage />}/>
-      <Route path="/testpage05" element={<TestPage05 />} errorElement={<ErrorPage />}/>
+      <Route path="/testpage01" element={<TestPage01 onRespostasChange={handleRespostasChange}/>} errorElement={<ErrorPage />}/>
+      <Route path="/testpage02" element={<TestPage02 onRespostasChange={handleRespostasChange}/>} errorElement={<ErrorPage />}/>
+      <Route path="/testpage03" element={<TestPage03 onRespostasChange={handleRespostasChange}/>} errorElement={<ErrorPage />}/>
+      <Route path="/testpage04" element={<TestPage04 onRespostasChange={handleRespostasChange}/>} errorElement={<ErrorPage />}/>
+      <Route path="/testpage05" element={<TestPage05 onRespostasChange={handleRespostasChange}/>} errorElement={<ErrorPage />}/>
       <Route path="/dessoftware" element={<DesSoftwarePage />} errorElement={<ErrorPage />}/>
       <Route path="/analisedados" element={<AnaliseDadosPage />} errorElement={<ErrorPage />}/>
       <Route path="/desweb" element={<DesWebPage />} errorElement={<ErrorPage />}/>

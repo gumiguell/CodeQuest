@@ -3,9 +3,13 @@ import "./TestPage05.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 
-const TestPage05Desktop: FunctionComponent = () => {
+interface TestPage05DesktopProps {
+  onRespostasChange: (respostas: { resposta1: string; resposta2: string; resposta3: string; resposta4: string; }) => void;
+}
+
+const TestPage05Desktop: FunctionComponent<TestPage05DesktopProps> = ({ onRespostasChange }) => {
   const [redirecting, setRedirecting] = useState(false);
   const [respostas, setRespostas] = useState({
     resposta1: "",
@@ -13,6 +17,10 @@ const TestPage05Desktop: FunctionComponent = () => {
     resposta3: "",
     resposta4: "",
   });
+
+  React.useEffect(() => {
+    onRespostasChange(respostas);
+  }, [onRespostasChange, respostas]);
 
   useEffect(() => {
     // Carregar respostas salvas quando o componente monta
@@ -326,7 +334,7 @@ const TestPage05Desktop: FunctionComponent = () => {
             Em uma escala de 1 a 5, o quanto você:
           </div>
         </div>
-        <Link to="/">
+        <Link to="/desaplicativos">
             <Button
               className="boto-continuar"
               name="Botão Continuar"

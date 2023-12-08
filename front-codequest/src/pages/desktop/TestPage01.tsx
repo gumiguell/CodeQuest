@@ -6,34 +6,42 @@ import { Link } from 'react-router-dom';
 import handleInputChange from '../../handleResp';
 import respostasData from '../../respostasData';
 
-const TestPage01Desktop: FunctionComponent = () => {
-  const [redirecting, setRedirecting] = useState(false);
-  const [respostas, setRespostas] = useState({
-    resposta1: "",
-    resposta2: "",
-    resposta3: "",
-    resposta4: "",
-  });
+interface TestPage01DesktopProps {
+  onRespostasChange: (respostas: { resposta1: string; resposta2: string; resposta3: string; resposta4: string; }) => void;
+}
 
-  useEffect(() => {
-    // Carregar respostas salvas quando o componente monta
-    const savedRespostas = localStorage.getItem("respostas");
-    if (savedRespostas) {
-      setRespostas(JSON.parse(savedRespostas));
-    }
-  }, []);
+const TestPage01Desktop: FunctionComponent<TestPage01DesktopProps> = ({ onRespostasChange }) => {
 
-  useEffect(() => {
-    // Salvar respostas no localStorage sempre que elas mudam
-    localStorage.setItem("respostas", JSON.stringify(respostas));
-  }, [respostas]);
-  
-  const handleRespostaChange = (pergunta: string, resposta: string) => {
-    setRespostas((prevRespostas) => ({
-      ...prevRespostas,
-      [pergunta]: resposta,
-    }));
-  };
+const [redirecting, setRedirecting] = useState(false);
+const [respostas, setRespostas] = useState({
+  resposta1: "",
+  resposta2: "",
+  resposta3: "",
+  resposta4: "",
+});
+
+React.useEffect(() => {
+  onRespostasChange(respostas);
+}, [onRespostasChange, respostas]);
+
+useEffect(() => {
+  // Carregar respostas salvas quando o componente monta
+  const savedRespostas = localStorage.getItem("respostas");
+  if (savedRespostas) {
+    setRespostas(JSON.parse(savedRespostas));
+  }
+}, []);
+
+useEffect(() => {
+  // Salvar respostas no localStorage sempre que elas mudam
+  localStorage.setItem("respostas", JSON.stringify(respostas));
+}, [respostas]);
+const handleRespostaChange = (pergunta: string, resposta: string) => {
+  setRespostas((prevRespostas) => ({
+    ...prevRespostas,
+    [pergunta]: resposta,
+  }));
+};
 
   const handleRedirect = () => {
     setRedirecting(true);

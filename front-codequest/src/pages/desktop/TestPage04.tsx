@@ -3,9 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
 import "./TestPage04.css";
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 
-const TestPage04Desktop: FunctionComponent = () => {
+interface TestPage04DesktopProps {
+  onRespostasChange: (respostas: { resposta1: string; resposta2: string; resposta3: string; resposta4: string; }) => void;
+}
+
+const TestPage04Desktop: FunctionComponent<TestPage04DesktopProps> = ({ onRespostasChange }) => {
   const [redirecting, setRedirecting] = useState(false);
   const [respostas, setRespostas] = useState({
     resposta1: "",
@@ -13,7 +17,9 @@ const TestPage04Desktop: FunctionComponent = () => {
     resposta3: "",
     resposta4: "",
   });
-
+  React.useEffect(() => {
+    onRespostasChange(respostas);
+  }, [onRespostasChange, respostas]);
   useEffect(() => {
     // Carregar respostas salvas quando o componente monta
     const savedRespostas = localStorage.getItem("respostas");
