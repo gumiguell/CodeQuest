@@ -1,6 +1,7 @@
 const Emails = require('../daos/emails.js');
 const Email = require('../dbos/email.js');
 const Comunicado = require('./comunicado.js');
+const { calculateJob } = require('../functions/CalculateTheProfission.js'); // Added import
 
 async function inclusao(req, res) {
     if(Object.values(req.body).length !=2 || !req.body.id || !req.body.email) {
@@ -171,4 +172,37 @@ async function recuperacaoDeTodos(req, res) {
     return res.status(200).json(ret);
 }
 
-module.exports = { inclusao, atualizacao, remocao, recuperacaoDeUm, recuperacaoDeTodos }
+async function calculateVocationRoute(req, res) {
+    try {
+        const { answers } = req.body;
+
+        // Input Validation
+        if (!answers || !Array.isArray(answers) || answers.length !== 20) {
+            const erro = Comunicado.novo('DDI','Dados Inválidos', 'As respostas fornecidas são inválidas. Esperava-se um array de 20 números.').object;
+            return res.status(400).json(erro);
+        }
+
+        for (const answer of answers) {
+            if (typeof answer !== 'number') {
+                const erro = Comunicado.novo('DDI','Dados Inválidos', 'Todas as respostas devem ser números.').object;
+                return res.status(400).json(erro);
+            }
+        }
+
+        // Call Calculation Logic
+        const result = calculateJob(answers);
+        return res.status(200).json(result);
+
+    } catch (error) {
+        console.error('Error calculating vocational test:', error); // Log the error on the server
+        // Check if the error is from calculateJob's specific validation or a general one
+        if (error.message && (error.message.includes('Missing Questionnarie') || error.message.includes('Any alternative is null') || error.message.includes('Entering invalid data'))) {
+            const erro = Comunicado.novo('DDI','Dados Inválidos', error.message).object;
+            return res.status(400).json(erro);
+        }
+        const erro = Comunicado.novo('PFL','Processamento Falhou', 'Ocorreu um erro ao calcular o resultado do teste vocacional.').object;
+        return res.status(500).json(erro);
+    }
+}
+
+module.exports = { inclusao, atualizacao, remocao, recuperacaoDeUm, recuperacaoDeTodos, calculateVocationRoute }

@@ -17,9 +17,7 @@ const HomePageDesktop: FunctionComponent = () => {
     const handleScroll = () => {
       if (aboutPageContainer) {
         const rect = aboutPageContainer.getBoundingClientRect();
-
-        // Verifique se o elemento aboutPageContainer está no campo de visão do usuário.
-        if (rect.top < window.innerHeight * 0.8) {
+        if (rect.top < window.innerHeight * 0.8 && displayText === "") { // Start typing only once
           let currentIndex = 0;
           const interval = setInterval(() => {
             if (currentIndex <= textToType.length) {
@@ -28,8 +26,8 @@ const HomePageDesktop: FunctionComponent = () => {
             } else {
               clearInterval(interval);
             }
-          }, 30); // Velocidade da digitação (50 milissegundos)
-          window.removeEventListener("scroll", handleScroll); // Remova o ouvinte após iniciar a animação.
+          }, 30); 
+          window.removeEventListener("scroll", handleScroll); 
         }
       }
     };
@@ -39,130 +37,128 @@ const HomePageDesktop: FunctionComponent = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [textToType]);
+  }, [textToType, displayText]); // Added displayText to dependencies
 
   const handleRedirect = () => {
     setRedirecting(true);
-
-    // Simule um atraso de 1 segundo antes do redirecionamento
     setTimeout(() => {
       setRedirecting(false);
-      // Realize o redirecionamento real no local apropriado dentro da função handleRedirect.
-      // history.push("/testpage01");
-    }, 1000); // 1000 milissegundos = 1 segundo
+      // Navigation is handled by RouterLink, this is for visual feedback if needed
+    }, 1000); 
   };
 
   return (
     <div className="home-page-desktop">
-      <div className="high-page">
+      <header className="high">
+        <img className="logo-branco-icon" alt="CodeQuest Logo" src="/logo-branco.png" />
+        <nav className="text-high">
+          <ScrollLink
+            to="aboutPageContainer"
+            smooth={true}
+            duration={500}
+            className="about"
+            id="txtAboutLink" // Changed id for clarity
+          >
+            SOBRE NÓS
+          </ScrollLink>
+          <ScrollLink
+            to="contactPageContainer"
+            smooth={true}
+            duration={500}
+            className="contact"
+            id="txtContactLink" // Changed id for clarity
+          >
+            CONTATO
+          </ScrollLink>
+        </nav>
+      </header>
+
+      <section className="high-page">
         <img className="background-high-icon" alt="" src="/background-high@2x.png" />
-        <img className="astronaut-icon" alt="" src="/astronaut@2x.png" />
-        <header className="high">
-          <img className="rectangle-high" alt="" src="/rectangle-high.svg" />
-          <img className="logo-branco-icon" alt="" src="/logo-branco.png" />
-          <div className="text-high">
-            <ScrollLink
-              to="aboutPageContainer"
-              duration={500}
-              className="about"
-              id="txtAbout"
-            >
-              about
-            </ScrollLink>
-            <ScrollLink
-              to="contactPageContainer"
-              duration={500}
-              className="contact"
-              id="txtContact"
-            >
-              contact
-            </ScrollLink>
+        <div className="hero-content">
+          <div className="title-and-button">
+            <div className="title4">
+              <p>SEU TESTE</p>
+              <p>TECNOLÓGICO</p>
+              <p>AQUI.</p>
+            </div>
+            <RouterLink to="/testpage01">
+              <Button
+                className="boto-iniciar"
+                name="Botão Iniciar"
+                id="btnIniciar"
+                variant="primary"
+                onClick={handleRedirect}
+                disabled={redirecting}
+              >
+                {redirecting ? "Aguarde..." : "INICIAR"}
+              </Button>
+            </RouterLink>
           </div>
-        </header>
-        <div className="title4">
-          <p>SEU TESTE</p>
-          <p>TECNOLÓGICO</p>
-          <p>AQUI.</p>
-          <RouterLink to="/testpage01">
-            <Button
-              className="boto-iniciar"
-              name="Botão Iniciar"
-              id="btnIniciar"
-              variant="primary"
-              onClick={handleRedirect}
-              disabled={redirecting}
-            >
-              {redirecting ? "Aguarde..." : "INICIAR"}
-            </Button>
-          </RouterLink>
+          <img className="astronaut-icon" alt="Astronauta" src="/astronaut@2x.png" />
         </div>
-      </div>
+      </section>
       
-      <div className="about-page" id="aboutPageContainer">
-        <img className="image-10-icon" alt="" src="/background-about@2x.png" />
-        <img className="rock-of-the-astronaut-1" alt="" src="/rock-of-the-astronaut-1@2x.png" />
-        <div className="title-about">
+      <section className="about-page" id="aboutPageContainer">
+        <img className="image-10-icon" alt="Fundo Sobre Nós" src="/background-about@2x.png" />
+        <img className="rock-of-the-astronaut-1" alt="Pedra do astronauta" src="/rock-of-the-astronaut-1@2x.png" />
+        <div className="title-about-container">
           <h1 className="about-us" id="titleAbout">
-            About us
+            SOBRE NÓS
           </h1>
           <div className="rectangle-title" />
         </div>
-        <h2 className="txtAbout" id="txtAbout">
-          <p>
+        <div className="txtAbout-container">
+          <p className="txtAbout" id="txtAboutP"> {/* Changed h2 to p for semantic text */}
             <span>{displayText}</span>
           </p>
-        </h2>
-        <div className="gustavo">
-          <img className="image-6-icon" alt="" src="/imgGustavo@2x.png" />
-          <h3 className="gustavo-miguel" id="txtGustavo">
-            Gustavo Miguel
-          </h3>
         </div>
-        <div className="kauan">
-          <img className="image-4-icon" alt="" src="/imgKauan@2x.png" />
-          <h3 className="kauan-piacente" id="txtKauan">
-            Kauan Piacente
-          </h3>
+        <div className="members-container"> {/* Added wrapper */}
+          <div className="member-card gustavo">
+            <img className="image-6-icon" alt="Gustavo Miguel" src="/imgGustavo@2x.png" />
+            <h3 className="member-name gustavo-miguel" id="txtGustavo">
+              Gustavo Miguel
+            </h3>
+          </div>
+          <div className="member-card kauan">
+            <img className="image-4-icon" alt="Kauan Piacente" src="/imgKauan@2x.png" />
+            <h3 className="member-name kauan-piacente" id="txtKauan">
+              Kauan Piacente
+            </h3>
+          </div>
+          <div className="member-card joo">
+            <img className="image-5-icon" alt="João Victor" src="/imgJoao@2x.png" />
+            <h3 className="member-name joo-victor" id="txtJoao">
+              João Victor
+            </h3>
+          </div>
         </div>
-        <div className="joo">
-          <h3 className="joo-victor" id="txtJoao">
-            João Victor
-          </h3>
-          <img className="image-5-icon" alt="" src="/imgJoao@2x.png" />
-        </div>
-      </div>
+      </section>
 
-      <div className="contact-page" id="contactPageContainer">
-      <img className="background-contact-icon" alt="" src="/background-contact@2x.png" />
-      <img className="logos-icon" alt="" src="/imgLogos@2x.png" />
-      <div className="socials">
-        <div className="instagram">
-          <a href="https://www.instagram.com/codequest_/" target="_blank" rel="noopener noreferrer">
-            <img className="vector-icon1" alt="" src="/undefined5.png" />
-          </a> 
-          <h2 className="cdquestinsta">@codequest_</h2>
-          
+      <footer className="contact-page" id="contactPageContainer"> {/* Changed to footer for semantics */}
+        <img className="background-contact-icon" alt="Fundo Contato" src="/background-contact@2x.png" />
+        <img className="logos-icon" alt="Logos parceiros" src="/imgLogos@2x.png" />
+        <div className="socials">
+          <div className="social-item instagram">
+            <a href="https://www.instagram.com/codequest_/" target="_blank" rel="noopener noreferrer">
+              <img className="vector-icon vector-icon1" alt="Instagram" src="/undefined5.png" /> {/* Added base class */}
+            </a> 
+            <h2 className="social-text cdquestinsta">@codequest_</h2>
+          </div>
+          <div className="social-item gmail">
+            <a href="mailto:codequest03@gmail.com" target="_blank" rel="noopener noreferrer">
+              <img className="vector-icon" alt="Gmail" src="/undefined4.png" />
+            </a> 
+            <h2 className="social-text cdquestmail">codequest03@gmail.com</h2>
+          </div>
+          <div className="social-item local">
+            <a href="https://maps.google.com/?q=R.+Culto+%C3%A0+Ci%C3%AAncia,+177+-+Centro,+Campinas+-+SP,+13020-060" target="_blank" rel="noopener noreferrer">
+              <img className="vector-icon vector-icon2" alt="Localização" src="/undefined6.png" /> {/* Added base class */}
+            </a>  
+            <h2 className="social-text cdquestloca">R. Culto à Ciência - Centro, Campinas - SP</h2>
+          </div>
         </div>
-        <div className="gmail">
-          <a href="mailto:codequest03@gmail.com" target="_blank" rel="noopener noreferrer">
-            <img className="vector-icon" alt="" src="/undefined4.png" />
-          </a> 
-          <h2 className="cdquestmail">codequest03@gmail.com</h2>
-          
-        </div>
-        <div className="local">
-          <a href="https://maps.google.com/?q=R.+Culto+%C3%A0+Ci%C3%AAncia,+177+-+Centro,+Campinas+-+SP,+13020-060" target="_blank" rel="noopener noreferrer">
-            <img className="vector-icon2" alt="" src="/undefined6.png" />
-          </a>  
-          <h2 className="cdquestloca">R. Culto à Ciência - Centro, Campinas - SP</h2>
-           
-          
-        </div>
-      </div>
-
-      </div>
-
-
+      </footer>
     </div>
   );
 };

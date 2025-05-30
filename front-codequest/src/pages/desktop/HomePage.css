@@ -1,489 +1,527 @@
+/* General Reset and Base Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrollbars caused by minor overflows */
+  box-sizing: border-box;
+  font-family: var(--font-tt-mussels-trl), sans-serif; /* Fallback font */
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 .home-page-desktop {
   position: relative;
   width: 100%;
   text-align: left;
-  font-size: 1.6vw; /* Use vw para tamanho de fonte responsivo */
   color: var(--color-white);
   font-family: var(--font-tt-mussels-trl);
-  overflow-x: hidden;
+  /* overflow-x: hidden; /* Already on body, but keep if needed for specific structure */
 }
 
-.background-contact-icon {
-  height: 100%;
+/* Variables (assuming they are defined elsewhere, e.g., :root or a theme file) */
+:root {
+  --font-tt-mussels-trl: "TT Mussels Trl", sans-serif; /* Example, ensure this font is loaded */
+  --color-white: #ffffff;
+  --color-midnightblue: #2d0159; /* Example */
+  --br-107xl: 126px; /* Example */
+  --br-31xl: 50px; /* Example */
+  --font-size-16xl: 1.5rem; /* Base for smaller elements */
+  --font-size-21xl: 1.75rem;
+  --font-size-31xl: 2rem;
+  --font-size-81xl: 4rem;
+  --font-size-131xl: 6rem;
+
+  /* Responsive Breakpoints (examples, align with your responsive.tsx if possible) */
+  --screen-mobile: 480px;
+  --screen-tablet: 768px;
+  --screen-desktop: 1024px;
+}
+
+
+/* High Section (Fixed Header) */
+.high {
+  position: fixed; /* Keep fixed for header behavior */
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 100%;
-}
-
-.cdquestinsta {
-  margin-left: 90px;
-  margin-top: -55px;
-}
-
-.cdquestmail {
-  margin-left: 90px;
-  margin-top: 15px;
-}
-
-.cdquestloca {
-  margin-left: 90px;
-  margin-top: -50px;
-}
-.logos-icon {
-  position: absolute;
-  top: 195px;
-  left: 127px;
-  width: 330px;
-  height: 255px;
-  object-fit: cover;
-}
-
-.vector-icon {
-  position: absolute;
-  left: 0;
-}
-
-.gmail {
-  position: absolute;
-  height: 29.06%;
-  width: 72.39%;
-  top: 34.54%;
-  right: 27.61%;
-  bottom: 36.41%;
-}
-
-.codequest- {
-  text-decoration: underline;
-  position: absolute;
-  width: 65.21%;
-  top: 26.31%;
-  left: 34.79%;
-  color: inherit;
-  display: inline-block;
-}
-
-.instagram{
-  position: absolute;
-}
-
-.gmail{
-  position: absolute;
-}
-
-.local{
-  position: absolute;
-}
-
-.local {
-  height: 30%;
-  top: 69%;
-}
-
-
-
-.vector-icon,
-.vector-icon1,
-.vector-icon2 {
-  width: 70px;
-  height: 70px;
-}
-
-.vector-icon:hover,
-.vector-icon1:hover,
-.vector-icon2:hover {
-  transform: scale(1.2);
-  transition: transform 0.2s ease-in-out;
-}
-
-.contact-page,
-.socials {
-  position: absolute;
-  object-fit: cover;
-  top: 26.74%;
-  right: 5.99%;
-  bottom: 28.41%;
-  left: 59.11%;
-}
-
-.contact-page {
-  height: 23.96%;
-  width: 100%;
-  top: 76.04%;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.image-10-icon,
-.rock-of-the-astronaut-1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1925px;
-  height: 945px;
-  object-fit: cover;
-}
-
-.rock-of-the-astronaut-1 {
-  height: 26.14%;
-  width: 33.18%;
-  right: 8.49%;
-  bottom: 73.86%;
-  left: 58.33%;
-  max-width: 100%;
-  overflow: hidden;
-  max-height: 100%;
-}
-
-.about-us {
-  margin: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: inherit;
-  font-weight: 700;
-  font-family: inherit;
-  display: inline-block;
-  width: 389.01px;
-}
-
-.rectangle-title {
-  position: absolute;
-  top: 101px;
-  left: 0;
-  background-color: var(--color-midnightblue);
-  width: 212.55px;
-  height: 32px;
-  overflow: hidden;
-}
-
-.rectangle-high {
-  position: relative;
-  border-radius: 0px 0px 20px 20px;
-  background: linear-gradient(90deg, #6113a8, rgba(69, 63, 203, 0));
-  backdrop-filter: blur(25px);
-  width: 100%;
-  height: 96px;
-}
-
-.title-about {
-  position: absolute;
-  top: 116px;
-  left: 62.16px;
-  width: 389.01px;
-  height: 133px;
-  font-size: var(--font-size-81xl);
-}
-
-.c {
-  font-family: var(--font-tt-mussels-trl);
-}
-
-.txtAbout {
-  margin: 0;
-  position: absolute;
-  top: 336px;
-  left: 62.16px;
-  font-size: var(--font-size-21xl);
-  display: inline-block;
-  width: 1700.42px;
-  font-family: inherit;
-}
-
-.image-6-icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: var(--br-107xl);
-  width: 271.71px;
-  height: 256px;
-  object-fit: cover;
-  cursor: pointer;
+  height: auto; /* Adjust height based on content */
+  min-height: 70px; /* Minimum height */
+  background: linear-gradient(90deg, #6113a8, rgba(69, 63, 203, 0.8)); /* Slightly more solid gradient */
+  backdrop-filter: blur(15px); /* Adjusted blur */
+  z-index: 1000;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.image-6-icon:hover {
-  transform: scale(1.1);
-}
-
-.gustavo-miguel {
-  margin: 0;
-  position: absolute;
-  top: 258px;
-  left: 15.99px;
-  font-size: inherit;
-  font-weight: 400;
-  font-family: inherit;
-  display: inline-block;
-  width: 234.61px;
-  text-shadow: 2px 1px 0#2d0159;
-}
-
-.gustavo,
-.image-4-icon {
-  position: absolute;
-  top: 545px;
-  left: 117.3px;
-  width: 271.71px;
-  height: 297px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.image-4-icon:hover {
-  transform: scale(1.1);
-}
-
-.image-4-icon {
-  top: 0;
-  left: 0;
-  border-radius: var(--br-107xl);
-  width: 269.7px;
-  height: 252px;
-  object-fit: cover;
-}
-
-.kauan-piacente {
-  margin: 0;
-  position: absolute;
-  top: 258px;
-  left: 18.97px;
-  font-size: inherit;
-  font-weight: 400;
-  font-family: inherit;
-  display: inline-block;
-  width: 235.61px;
-  text-shadow: 2px 1px 0#2d0159;
-}
-
-.kauan {
-  position: absolute;
-  top: 545px;
-  left: 786.04px;
-  width: 269.7px;
-  height: 297px;
-}
-
-.joo-victor {
-  margin: 0;
-  position: absolute;
-  top: 264px;
-  left: 49.08px;
-  font-size: inherit;
-  font-weight: 400;
-  font-family: inherit;
-  display: inline-block;
-  width: 167.43px;
-  text-shadow: 2px 1px 0#2d0159;
-}
-
-.image-5-icon,
-.joo {
-  position: absolute;
-  width: 269.7px;
-}
-
-.image-5-icon {
-  top: 0;
-  left: 0;
-  border-radius: var(--br-107xl);
-  height: 263px;
-  object-fit: cover;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease;
-}
-
-.image-5-icon:hover {
-  transform: scale(1.1);
-}
-
-.joo {
-  top: 539px;
-  left: 1466.81px;
-  height: 303px;
-}
-
-.about-page,
-.background-high-icon {
-  position: absolute;
-  top: 1083px;
-  left: 0;
-  width: 1925px;
-  height: 945px;
-  
-}
-
-.background-high-icon {
-  top: 0;
-  height: 1083px;
-  object-fit: cover;
-}
-
-.astronaut-icon,
-.rectangle-high-icon {
-  position: absolute;
-  top: 96px;
-  left: 1079px;
-  width: 828px;
-  height: 987px;
-  object-fit: cover;
-}
-
-.rectangle-high-icon {
-  top: 0;
-  left: 0;
-  border-radius: var(--br-xl);
-  width: 1925px;
-  height: 96px;
+  padding: 10px 20px; /* Vertical and horizontal padding */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Subtle shadow */
 }
 
 .logo-branco-icon {
-  position: absolute;
-  top: 15px;
-  left: 42px;
-  width: 295px;
-  height: 66px;
-  object-fit: cover;
-}
-
-.about {
-  margin: 0;
-  top: 0;
-  left: 0;
-  font-size: inherit;
-  font-weight: 700;
-  font-family: inherit;
-  display: inline-block;
-  width: 179px;
-  cursor: pointer;
-  cursor: pointer;
-  color: var(--color-white);
-  font-family: var(--font-tt-mussels-trl);
-  text-decoration: none;
-  transition: transform 0.3s ease;
-}
-
-.about:active {
-  transform: scale(0.9);
-}
-
-.about,
-.contact,
-.high,
-.text-high {
-  position: absolute;
-  height: 65px;
-}
-
-.contact {
-  margin: 0;
-  top: 0;
-  left: 294px;
-  font-size: inherit;
-  font-weight: 700;
-  font-family: inherit;
-  display: inline-block;
-  width: 179px;
-  cursor: pointer;
-  color: var(--color-white);
-  font-family: var(--font-tt-mussels-trl);
-  text-decoration: none;
-  transition: transform 0.3s ease;
-}
-
-.contact:active {
-  transform: scale(0.9);
+  height: 50px; /* Adjust height, width will auto-scale */
+  width: auto;
+  max-width: 250px; /* Prevent it from becoming too large */
+  object-fit: contain;
 }
 
 .text-high {
-  top: 16px;
-  left: 1368px;
-  width: 473px;
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between "about" and "contact" */
 }
 
-.high {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 1925px;
-  height: 59px;
-  text-align: left;
-  font-size: var(--font-size-31xl);
+.text-high .about,
+.text-high .contact {
+  font-size: var(--font-size-21xl); /* Base size, adjust in media queries */
+  font-weight: 700;
   color: var(--color-white);
-  font-family: var(--font-tt-mussels-trl);
-  z-index: 1000;
-
+  text-decoration: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.seu-teste-tecnolgico-container {
+.text-high .about:hover,
+.text-high .contact:hover {
+  transform: scale(1.1);
+  color: #ddd; /* Slight hover effect */
+}
+
+/* Hero Section (high-page content) */
+.high-page {
+  display: flex; /* Use flex for overall layout */
+  flex-direction: column; /* Stack children vertically by default */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically (if section has fixed height) */
+  width: 100%;
+  min-height: 100vh; /* Make it at least full viewport height */
+  padding-top: 90px; /* Account for fixed header height */
+  position: relative; /* For positioning background image */
+  text-align: center; /* Center text for mobile */
+  overflow: hidden; /* Prevent astronaut from overflowing weirdly on resize */
+}
+
+.background-high-icon {
   position: absolute;
   top: 0;
   left: 0;
-  font-size: inherit;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover the entire area */
+  z-index: -1; /* Behind content */
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%; /* Max width for content */
+  max-width: 1200px; /* Prevent content from becoming too wide */
+  position: relative; /* Ensure z-index works for children if needed */
+  z-index: 1;
+}
+
+.title-and-button {
+  width: 100%;
+}
+
+.title4 {
+  font-size: var(--font-size-81xl); /* Base size for title */
   font-weight: 700;
-  font-family: inherit;
+  color: var(--color-white);
+  margin-bottom: 30px; /* Space below title */
+  line-height: 1.2;
+}
+
+.title4 p {
+  margin: 0; /* Remove default paragraph margins */
+}
+
+.astronaut-icon {
+  width: 300px; /* Base size for astronaut */
+  max-width: 80%; /* Ensure it doesn't overflow on small screens */
+  height: auto;
+  margin-top: 20px; /* Space above astronaut on mobile */
+  object-fit: contain;
 }
 
 .boto-iniciar {
-  margin: 40px;
-  width: 270px;
-  height: 70px;
-  position: absolute;
-  top: calc(50% + 127.5px);
-  left: 450px;
+  width: 220px;
+  height: 60px;
   background-image: linear-gradient(to right, #D100FF, #DB00FF);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: var(--br-31xl);
   cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease;
   font-size: var(--font-size-21xl);
   font-weight: bold;
+  color: var(--color-white);
+  transition: transform 0.3s ease;
+  margin-top: 20px; /* Space above button */
 }
 
-.boto-iniciar:active {
-  transform: scale(0.9);
+.boto-iniciar:hover {
+  transform: scale(1.05);
 }
 
-.title4 {
+/* About Us Section */
+.about-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px; /* Vertical and horizontal padding */
+  position: relative; /* For background image positioning */
+  width: 100%;
+}
+
+.image-10-icon { /* Background for about page */
   position: absolute;
-  top: 260px;
-  left: 142px;
-  width: 1026px;
-  height: 495px;
-  position: absolute;
-  font-size: inherit;
-  font-weight: 700;
-  font-family: inherit;
-}
-
-.high-page {
   top: 0;
   left: 0;
-  width: 100%; /* Defina a largura que você deseja, por exemplo, 100% para ocupar toda a largura */
-  height: 70px; /* Defina a altura que você deseja, por exemplo, 70px */
-  font-size: var(--font-size-131xl);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.title-about-container {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative; /* For the rectangle-title accent */
+}
+
+.about-us {
+  font-size: var(--font-size-81xl);
+  font-weight: 700;
+  margin: 0;
+  position: relative; /* Ensure it's above the rectangle */
+  z-index: 1;
+}
+
+.rectangle-title {
+  position: absolute;
+  bottom: -5px; /* Position under the title */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-midnightblue);
+  width: 150px; /* Shorter accent */
+  height: 15px; /* Thicker accent */
+  z-index: 0;
+}
+
+.txtAbout-container {
+  width: 90%;
+  max-width: 800px; /* Control text width for readability */
+  margin-bottom: 40px;
+}
+
+.txtAbout {
+  font-size: var(--font-size-21xl);
+  text-align: center; /* Center align the paragraph */
+  line-height: 1.6;
+  margin:0;
+}
+
+.members-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap; /* Allow members to wrap on smaller screens */
+  width: 100%;
+  max-width: 1200px; /* Max width for members area */
+}
+
+.member-card {
+  width: 280px; /* Base width for member cards */
+  margin: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.member-card img { /* Common style for member images */
+  width: 200px; /* Fixed size for consistency */
+  height: 200px;
+  border-radius: 50%; /* Circular images */
+  object-fit: cover;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.member-card img:hover {
+  transform: scale(1.1);
+}
+
+.member-name {
+  font-size: var(--font-size-21xl); /* Adjusted for consistency */
+  font-weight: 400;
+  text-shadow: 1px 1px 0px #2d0159; /* Simplified shadow */
+}
+
+.rock-of-the-astronaut-1 {
+  display: none; /* Hide by default, show on larger screens if desired */
+  width: 200px; /* Example size */
+  height: auto;
+  position: absolute; /* If needed for specific placement, but try to avoid */
+  /* top: ...; left: ...; */
 }
 
 
-.home-page-desktop {
+/* Contact Section */
+.contact-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px;
+  text-align: center;
   position: relative;
   width: 100%;
-  height: 2659px;
-  text-align: left;
-  font-size: var(--font-size-16xl);
-  color: var(--color-white);
-  font-family: var(--font-tt-mussels-trl);
+  min-height: 50vh; /* Ensure it has some height */
 }
+
+.background-contact-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.logos-icon { /* Decorative partner logos */
+  width: 250px; /* Adjust size */
+  height: auto;
+  margin-bottom: 30px;
+  object-fit: contain;
+}
+
+.socials {
+  display: flex;
+  flex-direction: column; /* Stack social items */
+  align-items: center; /* Center items if stacked, or flex-start if labels are long */
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* Space between social items */
+  text-decoration: none;
+  color: var(--color-white);
+}
+
+.vector-icon { /* Common style for social icons */
+  width: 40px; /* Adjust size */
+  height: 40px;
+  margin-right: 15px; /* Space between icon and text */
+  transition: transform 0.2s ease-in-out;
+}
+.vector-icon:hover {
+  transform: scale(1.2);
+}
+/* Specific icon classes if needed, otherwise .vector-icon can be used for all */
+.vector-icon1 {} /* Instagram */
+.vector-icon2 {} /* Location */
+
+
+.social-text { /* Common style for social text */
+  font-size: var(--font-size-16xl); /* Adjust size */
+  margin: 0; /* Reset margins */
+}
+/* Remove specific margin/positioning for these as flexbox handles it */
+.cdquestinsta, .cdquestmail, .cdquestloca {
+  margin: 0; 
+}
+
+
+/* Media Queries */
+
+/* Mobile Devices (e.g., max-width: 480px or 576px) */
+@media (max-width: 576px) {
+  .high {
+    min-height: 60px;
+    padding: 5px 15px;
+  }
+  .logo-branco-icon {
+    height: 40px;
+  }
+  .text-high {
+    gap: 10px; /* Smaller gap */
+  }
+  .text-high .about, .text-high .contact {
+    font-size: var(--font-size-16xl); /* Smaller font for header links */
+    padding: 5px;
+  }
+
+  .title4 {
+    font-size: 2.5rem; /* Significantly smaller title */
+  }
+  .astronaut-icon {
+    width: 200px; /* Smaller astronaut */
+    margin-top: 30px;
+  }
+  .boto-iniciar {
+    width: 180px;
+    height: 50px;
+    font-size: var(--font-size-16xl); /* Smaller button text */
+  }
+
+  .about-us {
+    font-size: 2.8rem; /* Smaller section title */
+  }
+  .rectangle-title {
+    width: 100px;
+    height: 10px;
+  }
+  .txtAbout {
+    font-size: var(--font-size-16xl); /* Smaller about text */
+  }
+  .member-card {
+    width: 80%; /* Member cards take more width */
+    margin: 15px 0;
+  }
+  .member-card img {
+    width: 150px;
+    height: 150px;
+  }
+  .member-name {
+    font-size: var(--font-size-16xl);
+  }
+
+  .logos-icon {
+    width: 180px;
+    margin-bottom: 20px;
+  }
+  .vector-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  .social-text {
+    font-size: 0.9rem; /* Smaller social text */
+  }
+  .social-item {
+    margin-bottom: 15px;
+  }
+}
+
+/* Tablet Devices (e.g., min-width: 577px and max-width: 768px) */
+@media (min-width: 577px) and (max-width: 768px) {
+  .high-page .hero-content {
+     /* Could change to row if space allows */
+  }
+  .title4 {
+    font-size: 3.5rem; 
+  }
+  .astronaut-icon {
+    width: 250px;
+  }
+  .boto-iniciar {
+    width: 200px;
+    height: 55px;
+  }
+
+  .about-us {
+    font-size: 3rem;
+  }
+  .txtAbout {
+    font-size: 1.1rem;
+  }
+  .member-card {
+    width: 45%; /* Two cards per row */
+  }
+  .member-card img {
+    width: 180px;
+    height: 180px;
+  }
+  .socials {
+     flex-direction: row; /* Social items in a row for tablet */
+     flex-wrap: wrap;
+     justify-content: center;
+     gap: 20px;
+  }
+  .social-item {
+    margin-bottom: 10px; /* Adjust spacing for row layout */
+  }
+}
+
+/* Desktop (adjustments for larger screens if needed) */
+@media (min-width: 769px) {
+  .high-page .hero-content {
+    flex-direction: row; /* Title/button on one side, astronaut on other */
+    justify-content: space-between; /* Or space-around */
+    align-items: center;
+    text-align: left; /* Align text to left on desktop */
+  }
+  .title-and-button {
+    width: 50%; /* Example width */
+    max-width: 600px;
+  }
+  .astronaut-icon {
+    width: 400px; /* Larger astronaut for desktop */
+    max-width: 45%;
+    margin-top: 0; /* Reset margin */
+  }
+  .title4 {
+    font-size: var(--font-size-131xl); /* Restore larger desktop font size */
+  }
+  .boto-iniciar {
+    margin-left: 0; /* Align button to the left of its container */
+  }
+  .about-us {
+    font-size: var(--font-size-81xl);
+  }
+  .txtAbout {
+    font-size: var(--font-size-21xl);
+    text-align: left;
+  }
+  .member-card {
+    width: 30%; /* Three cards per row */
+  }
+   .socials {
+    flex-direction: row;
+    justify-content: space-evenly; /* Spread out social items */
+    width: 100%;
+    max-width: 800px; /* Limit width of social links container */
+  }
+  .social-item {
+    margin-bottom: 0;
+  }
+  .rock-of-the-astronaut-1 {
+    display: block; /* Show this decorative image on desktop */
+    position: absolute;
+    width: 25%;
+    height: auto;
+    bottom: 50px; /* Example positioning */
+    right: 50px;
+    z-index: 0;
+  }
+}
+
+/* Ensure any fixed dimensions on .home-page-desktop itself are removed or responsive */
+.home-page-desktop {
+  /* height: 2659px; Remove fixed height, let content define it */
+}
+
+/* Legacy absolute positioning from original CSS - to be removed or refactored */
+/* .instagram, .gmail, .local { position: absolute; } -> Handled by flex on .social-item */
+/* .cdquestinsta, .cdquestmail, .cdquestloca { margin-left: ...; margin-top: ...; } -> Handled by flex spacing */
+/* .logos-icon { position: absolute; } -> Now positioned by flex in .contact-page */
+/* .title-about, .txtAbout, .gustavo, .kauan, .joo { position: absolute; } -> Handled by flex/flow */
+/* .high .logo-branco-icon, .high .text-high { position: absolute; } -> Handled by flex on .high */
+/* .high-page .title4, .high-page .astronaut-icon, .high-page .boto-iniciar { position: absolute; } -> Handled by flex on .high-page / .hero-content */
+
+/* Ensure .rectangle-high is not used if .high is the header itself */
+.rectangle-high { display: none; } /* This was likely for the old fixed-size header background */
+
+/* Cleanup any remaining fixed widths that might cause overflow */
+.about-page, .contact-page { /* These were 1925px */
+  width: 100%;
+}
+
+/* Final check for any remaining large fixed dimensions or problematic absolute positions */
+/* The goal is a fluid layout that adapts, not fixed pixel perfection from the original desktop-only design */

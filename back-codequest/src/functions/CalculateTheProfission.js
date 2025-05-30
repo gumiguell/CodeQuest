@@ -6,20 +6,21 @@ class CalculateTheJob {
     #formAnswers
     
     constructor(formAnswers) {
-        this.#formAnswers = formAnswers;
+        this.formAnswers = formAnswers;
     }
     
     get formAnswers() { return this.#formAnswers }
     
     set formAnswers(formAnswers) {
-        const ENNEAGRAM_QUESTIONS_QUANTITY = 25;
+        const EXPECTED_ANSWERS = 20;
         if(formAnswers === undefined) throw ('Missing Questionnarie');
-        if(formAnswers.length !== ENNEAGRAM_QUESTIONS_QUANTITY) throw ('Any alternative is null');
-        for(let line = 0; line < ENNEAGRAM_QUESTIONS_QUANTITY; line++) {           
-            if(typeof formAnswers[line] !== Number ||
+        if(formAnswers.length !== EXPECTED_ANSWERS) throw ('Any alternative is null');
+        this.#formAnswers = []; 
+        for(let line = 0; line < EXPECTED_ANSWERS; line++) {           
+            if(typeof formAnswers[line] !== 'number' || // Corrected 'Number' to 'number'
                 isNaN(formAnswers[line]) ||
-                formAnswers[line] !== parseInt(formAnswers[line] ||
-                formAnswers[line] <= 0 || formAnswers[line] > 5)) 
+                formAnswers[line] !== parseInt(formAnswers[line]) || // Corrected logical OR error
+                formAnswers[line] <= 0 || formAnswers[line] > 5) 
                     throw('Entering invalid data');
             this.#formAnswers[line] = formAnswers[line];            
         }
@@ -27,29 +28,29 @@ class CalculateTheJob {
 
 }
 function calculateJob(formAnswers){
-    formAnswers = new CalculateTheJob(formAnswers);
-    const ENNEAGRAM_QUESTIONS_QUANTITY = 45;
-    let sumType1;
-    let sumType2;
-    let sumType3;
-    let sumType4;
-    let sumType5;    
-    let resp;
-    for(let line = 0; line < ENNEAGRAM_QUESTIONS_QUANTITY; line++) {
-        if(line < 5) {
-            sumType1 += this.formAnswers[line];
+    const jobCalculator = new CalculateTheJob(formAnswers); // Create instance
+    const QUESTIONS_TO_PROCESS = 20; // Define number of questions to process
+    let sumType1 = 0; // Initialize sumType1
+    let sumType2 = 0; // Initialize sumType2
+    let sumType3 = 0; // Initialize sumType3
+    let sumType4 = 0; // Initialize sumType4
+    let sumType5 = 0; // Initialize sumType5
+    let resp = []; // Initialize resp
+    for(let line = 0; line < QUESTIONS_TO_PROCESS; line++) { // Loop through questions to process
+        if(line < 4) { // Questions 0-3 for sumType1
+            sumType1 += jobCalculator.formAnswers[line]; // Access answers from instance
         }
-        if(line >= 5 && line < 10) {
-            sumType2 += this.formAnswers[line];
+        if(line >= 4 && line < 8) { // Questions 4-7 for sumType2
+            sumType2 += jobCalculator.formAnswers[line]; // Access answers from instance
         }
-        if(line >= 10 && line < 15) {
-            sumType3 += this.formAnswers[line];
+        if(line >= 8 && line < 12) { // Questions 8-11 for sumType3
+            sumType3 += jobCalculator.formAnswers[line]; // Access answers from instance
         }
-        if(line >= 15 && line < 20) {
-            sumType4 += this.formAnswers[line];
+        if(line >= 12 && line < 16) { // Questions 12-15 for sumType4
+            sumType4 += jobCalculator.formAnswers[line]; // Access answers from instance
         }
-        if(line >= 20 && line < 25) {
-            sumType5 += this.formAnswers[line];
+        if(line >= 16 && line < 20) { // Questions 16-19 for sumType5
+            sumType5 += jobCalculator.formAnswers[line]; // Access answers from instance
         }       
     }
     if(sumType1 >= 15) resp[0] = sumType1;
