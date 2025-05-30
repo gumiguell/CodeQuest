@@ -1,21 +1,29 @@
 import { FunctionComponent } from "react";
-import "./TestPage05.css";
+import "./TestPage05.css"; // Assuming TestPage05.css will be created/updated
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import React,{ useState, useEffect } from "react";
 
+const LOCAL_STORAGE_KEY = "respostasPage5";
+
+const answerMapping: { [key: string]: number } = {
+  "nadaPreocupado": 1, "poucoPreocupado": 2, "neutro": 3, "preocupado": 4, "muitoPreocupado": 5,
+  "nadaInteressado": 1, "poucoIneressado": 2, "poucoInteressado": 2, "interessado": 4, "muitoInteressado": 5,
+  "nadaMotivado": 1, "poucoMotivado": 2, "motivado": 4, "muitoMotivado": 5
+};
+
 interface TestPage05DesktopProps {
-  onRespostasChange: (respostas: { resposta1: string; resposta2: string; resposta3: string; resposta4: string; }) => void;
+  onRespostasChange: (respostas: { resposta1: number | null; resposta2: number | null; resposta3: number | null; resposta4: number | null; }) => void;
 }
 
 const TestPage05Desktop: FunctionComponent<TestPage05DesktopProps> = ({ onRespostasChange }) => {
   const [redirecting, setRedirecting] = useState(false);
-  const [respostas, setRespostas] = useState({
-    resposta1: "",
-    resposta2: "",
-    resposta3: "",
-    resposta4: "",
+  const [respostas, setRespostas] = useState<{ resposta1: number | null; resposta2: number | null; resposta3: number | null; resposta4: number | null; }>({
+    resposta1: null,
+    resposta2: null,
+    resposta3: null,
+    resposta4: null,
   });
 
   React.useEffect(() => {
@@ -23,341 +31,156 @@ const TestPage05Desktop: FunctionComponent<TestPage05DesktopProps> = ({ onRespos
   }, [onRespostasChange, respostas]);
 
   useEffect(() => {
-    // Carregar respostas salvas quando o componente monta
-    const savedRespostas = localStorage.getItem("respostas");
+    const savedRespostas = localStorage.getItem(LOCAL_STORAGE_KEY); 
     if (savedRespostas) {
-      setRespostas(JSON.parse(savedRespostas));
+      try {
+        const parsedRespostas = JSON.parse(savedRespostas);
+        setRespostas({
+          resposta1: typeof parsedRespostas.resposta1 === 'number' ? parsedRespostas.resposta1 : null,
+          resposta2: typeof parsedRespostas.resposta2 === 'number' ? parsedRespostas.resposta2 : null,
+          resposta3: typeof parsedRespostas.resposta3 === 'number' ? parsedRespostas.resposta3 : null,
+          resposta4: typeof parsedRespostas.resposta4 === 'number' ? parsedRespostas.resposta4 : null,
+        });
+      } catch (error) {
+        console.error("Failed to parse respostas from localStorage for TestPage05", error);
+        setRespostas({ resposta1: null, resposta2: null, resposta3: null, resposta4: null });
+      }
     }
   }, []);
 
   useEffect(() => {
-    // Salvar respostas no localStorage sempre que elas mudam
-    localStorage.setItem("respostas", JSON.stringify(respostas));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(respostas)); 
   }, [respostas]);
   
-  const handleRespostaChange = (pergunta: string, resposta: string) => {
+  const handleRespostaChange = (pergunta: keyof typeof respostas, respostaValue: string) => {
+    const mappedValue = answerMapping[respostaValue];
     setRespostas((prevRespostas) => ({
       ...prevRespostas,
-      [pergunta]: resposta,
+      [pergunta]: mappedValue !== undefined ? mappedValue : (respostaValue === "neutro" ? 3 : null),
     }));
   };
 
-  const handleRedirect = () => {
-    // Ativar o sinalizador de redirecionamento para mostrar algum indicador de carregamento (opcional).
+  const handleLinkClick = () => {
     setRedirecting(true);
-
-    // Atraso de 1000 milissegundos (1 segundo) antes do redirecionamento.
     setTimeout(() => {
-      setRedirecting(false); // Desativar o sinalizador de redirecionamento.
-    }, 5000); // 1000 milissegundos = 1 segundo
+      setRedirecting(false); 
+    }, 1000); 
+  };
+
+  // Helper to generate radio options for a question
+  const renderOptions = (questionName: keyof typeof respostas, options: string[]) => {
+    return options.map(value => (
+      <li className="option-item" key={value}>
+        <label>
+          <input 
+            type="radio" 
+            value={value}
+            name={questionName}
+            checked={respostas[questionName] === answerMapping[value]}
+            onChange={() => handleRespostaChange(questionName, value)}
+          />{" "}
+          {/* Auto-generate label text, handling the typo case */}
+          {value === "poucoIneressado" ? "Pouco Interessado" : value.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
+        </label>
+      </li>
+    ));
   };
 
   return (
-    <div className="testpage05-desktop">
-      <div className="test-page4">
-        <div className="background-iniciar4">
-          <img
-            className="rectangle-login-icon3"
-            alt=""
-            src="/rectangle-quest.png"
-          />
+    <div className="test-page-wrapper"> {/* Consistent wrapper */}
+      <div className="test-page-container"> {/* Renamed from test-page4 */}
+        <img className="logo-padrao" alt="CodeQuest Logo" src="/logo-padrao1@2x.png" /> {/* Simplified class */}
+        
+        <div className="title-test"> {/* Simplified class, was title-test3 */}
+          <div className="rectangle-title-bg" /> {/* Simplified class */}
+          <div className="title-text"> {/* Simplified class */}
+            Em uma escala de 1 a 5, o quanto você:
+          </div>
         </div>
-        <img className="logo-padrao-icon8" alt="" src="/logo-padrao1@2x.png" />
-        <div className="text-test4">
-          <div className="se-preocupa-em-container">
-            <ul className="se-preocupa-em-proteger-inform">
-              <h3 className="nada-preocupado">
+
+        <div className="questions-area"> {/* Renamed from text-test4 */}
+          <div className="question-row">
+            <div className="question-block se-preocupa-em-container"> {/* Base + specific class */}
+              <h3 className="question-title">
                 <b>
                   Se preocupa em proteger informações pessoais e digitais de
                   possíveis ameaças?
                 </b>
               </h3>
-            </ul>
-            <ul className="se-preocupa-em-proteger-inform">
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="nadaPreocupado" 
-                name="resposta1"
-                checked={respostas.resposta1 === "nadaPreocupado"}
-                onChange={() => handleRespostaChange("resposta1", "nadaPreocupado")}
-                />{" "}
-                Nada preocupado
-                </label>
-              </h4>
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="poucoPreocupado" 
-                name="resposta1"
-                checked={respostas.resposta1 === "poucoPreocupado"}
-                onChange={() => handleRespostaChange("resposta1", "poucoPreocupado")}
-                />{" "}
-                Pouco preocupado
-                </label>
-              </h4>
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="neutro" 
-                name="resposta1"
-                checked={respostas.resposta1 === "neutro"}
-                onChange={() => handleRespostaChange("resposta1", "neutro")}
-                />{" "}
-                Neutro
-                </label>
-              </h4>
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="preocupado" 
-                name="resposta1"
-                checked={respostas.resposta1 === "preocupado"}
-                onChange={() => handleRespostaChange("resposta1", "preocupado")}
-                />{" "}
-                Preocupado
-                </label>
-              </h4>
-              <h4>
-                <label><input 
-                type="radio" 
-                value="muitoPreocupado" 
-                name="resposta1"
-                checked={respostas.resposta1 === "muitoPreocupado"}
-                onChange={() => handleRespostaChange("resposta1", "muitoPreocupado")}
-                />{" "}
-                Muito preocupado
-                </label>
-              </h4>
-            </ul>
-          </div>
-          <div className="se-sente-atrado-container1">
-            <ul className="se-preocupa-em-proteger-inform">
-              <h3 className="nada-preocupado">
+              <ul className="question-options-list">
+                {renderOptions("resposta1", ["nadaPreocupado", "poucoPreocupado", "neutro", "preocupado", "muitoPreocupado"])}
+              </ul>
+            </div>
+
+            <div className="question-block se-sente-atrado-container1">
+              <h3 className="question-title">
                 <b>
                   Se sente atraído pela ideia de entender como hackers trabalham
                   para criar defesas contra ataques cibernéticos?
                 </b>
               </h3>
-            </ul>
-            <ul className="se-preocupa-em-proteger-inform">
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="nadaInteressado" 
-                name="resposta2"
-                checked={respostas.resposta2 === "nadaInteressado"}
-                onChange={() => handleRespostaChange("resposta2", "nadaInteressado")}
-                />{" "}
-                Nada interessado
-                </label>
-              </h4>
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="poucoIneressado" 
-                name="resposta2"
-                checked={respostas.resposta2 === "poucoIneressado"}
-                onChange={() => handleRespostaChange("resposta2", "poucoIneressado")}
-                />{" "}
-                Pouco interessado
-                </label>
-              </h4>
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="neutro" 
-                name="resposta2"
-                checked={respostas.resposta2 === "neutro"}
-                onChange={() => handleRespostaChange("resposta2", "neutro")}
-                />{" "}
-                Neutro
-                </label>
-              </h4>
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="interessado" 
-                name="resposta2"
-                checked={respostas.resposta2 === "interessado"}
-                onChange={() => handleRespostaChange("resposta2", "interessado")}
-                />{" "}
-                Interessado
-                </label>
-              </h4>
-              <h4>
-                <label><input 
-                type="radio" 
-                value="muitoInteressado" 
-                name="resposta2"
-                checked={respostas.resposta2 === "muitoInteressado"}
-                onChange={() => handleRespostaChange("resposta2", "muitoInteressado")}
-                />{" "}
-                Muito interessado
-                </label>
-              </h4>
-            </ul>
+              <ul className="question-options-list">
+                 {/* Note the typo "poucoIneressado" here as per original file value */}
+                {renderOptions("resposta2", ["nadaInteressado", "poucoIneressado", "neutro", "interessado", "muitoInteressado"])}
+              </ul>
+            </div>
           </div>
-          <div className="gostaria-de-aprender-container3">
-            <ul className="se-preocupa-em-proteger-inform">
-              <h3 className="nada-preocupado">
+
+          <div className="question-row">
+            <div className="question-block gostaria-de-aprender-container3">
+              <h3 className="question-title">
                 <b>
                   Gostaria de aprender a criar estratégias de segurança para
                   proteger sistemas e redes de possíveis invasões?
                 </b>
               </h3>
-            </ul>
-            <ul className="se-preocupa-em-proteger-inform">
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="nadaInteressado" 
-                name="resposta3"
-                checked={respostas.resposta3 === "nadaInteressado"}
-                onChange={() => handleRespostaChange("resposta3", "nadaInteressado")}
-                />{" "}
-                Nada interessado
-                </label>
-              </h4>
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="poucoInteressado" 
-                name="resposta3"
-                checked={respostas.resposta3 === "poucoInteressado"}
-                onChange={() => handleRespostaChange("resposta3", "poucoInteressado")}
-                />{" "}
-                Pouco interessado
-                </label>
-              </h4>
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="neutro" 
-                name="resposta3"
-                checked={respostas.resposta3 === "neutro"}
-                onChange={() => handleRespostaChange("resposta3", "neutro")}
-                />{" "}
-                Neutro
-                </label>
-              </h4>
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="interessado" 
-                name="resposta3"
-                checked={respostas.resposta3 === "interessado"}
-                onChange={() => handleRespostaChange("resposta3", "interessado")}
-                />{" "}
-                Interessado
-                </label>
-              </h4>
-              <h4>
-                <label><input 
-                type="radio" 
-                value="muitoInteressado" 
-                name="resposta3"
-                checked={respostas.resposta3 === "muitoInteressado"}
-                onChange={() => handleRespostaChange("resposta3", "muitoInteressado")}
-                />{" "}
-                Muito interessado
-                </label>
-              </h4>
-            </ul>
-          </div>
-          <div className="se-sente-motivado-container2">
-            <ul className="se-preocupa-em-proteger-inform">
-              <h3 className="nada-preocupado">
+              <ul className="question-options-list">
+                {/* This uses "poucoInteressado" (correct spelling) */}
+                {renderOptions("resposta3", ["nadaInteressado", "poucoInteressado", "neutro", "interessado", "muitoInteressado"])}
+              </ul>
+            </div>
+
+            <div className="question-block se-sente-motivado-container2">
+              <h3 className="question-title">
                 <b>
                   Se sente motivado a estar atualizado sobre as últimas ameaças
                   digitais e como se defender delas?
                 </b>
               </h3>
-            </ul>
-            <ul className="se-preocupa-em-proteger-inform">
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="nadaMotivado" 
-                name="resposta4"
-                checked={respostas.resposta4 === "nadaMotivado"}
-                onChange={() => handleRespostaChange("resposta4", "nadaMotivado")}
-                />{" "}
-                Nada Motivado</label>
-              </h4>
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="poucoMotivado" 
-                name="resposta4"
-                checked={respostas.resposta4 === "poucoMotivado"}
-                onChange={() => handleRespostaChange("resposta4", "poucoMotivado")}
-                />{" "}
-                Pouco Motivado</label>
-              </h4>
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="neutro" 
-                name="resposta4"
-                checked={respostas.resposta4 === "neutro"}
-                onChange={() => handleRespostaChange("resposta4", "neutro")}
-                />{" "}
-                Neutro</label>
-              </h4>
-              <h4 className="nada-preocupado">
-                <label><input 
-                type="radio" 
-                value="motivado" 
-                name="resposta4"
-                checked={respostas.resposta4 === "motivado"}
-                onChange={() => handleRespostaChange("resposta4", "motivado")}
-                />{" "}
-                Motivado</label>
-              </h4>
-              <h4>
-                <label><input 
-                type="radio" 
-                value="muitoMotivado" 
-                name="resposta4"
-                checked={respostas.resposta4 === "muitoMotivado"}
-                onChange={() => handleRespostaChange("resposta4", "muitoMotivado")}
-                />{" "}
-                Muito Motivado</label>
-              </h4>
-            </ul>
+              <ul className="question-options-list">
+                {renderOptions("resposta4", ["nadaMotivado", "poucoMotivado", "neutro", "motivado", "muitoMotivado"])}
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="title-test3">
-          <div className="rectangle-div" />
-          <div className="em-uma-escala3">
-            Em uma escala de 1 a 5, o quanto você:
-          </div>
+        
+        <div className="navigation-buttons">
+          <Link to="/testpage04">
+              <Button
+                className="boto-anterior"
+                name="Botão Anterior"
+                id="btnAnterior"
+                variant="primary"
+                onClick={handleLinkClick}
+                disabled={redirecting}
+              >
+                {redirecting ? "..." : <img src="/arrow.svg" alt="Anterior" />}
+              </Button>
+          </Link>
+          {/* Link to /save (SavePage) as this is the last test page */}
+          <Link to="/save"> 
+              <Button
+                className="boto-continuar" // Re-using class, but text is FINALIZAR
+                name="Botão Finalizar" // Changed name for clarity
+                id="btnFinalizar"       // Changed ID for clarity
+                variant="primary"
+                onClick={handleLinkClick} 
+                disabled={redirecting}
+              >
+                {redirecting ? "Aguarde..." : "FINALIZAR"}
+              </Button>
+          </Link>
         </div>
-        <Link to="/desaplicativos">
-            <Button
-              className="boto-continuar"
-              name="Botão Continuar"
-              id="btnContinuar"
-              variant="primary"
-              onClick={handleRedirect}
-              disabled={redirecting}
-            >
-              {redirecting ? "Aguarde..." : "FINALIZAR"}
-            </Button>
-        </Link>
-        <Link to="/testpage04">
-            <Button
-              className="boto-anterior"
-              name="Botão Anterior"
-              id="btnAnterior"
-              variant="primary"
-              onClick={handleRedirect}
-              disabled={redirecting}
-            >
-              {redirecting ? "Aguarde..." : <img src="/arrow.svg" alt="Seta" />}
-            </Button>
-        </Link>
       </div>
     </div>
   );

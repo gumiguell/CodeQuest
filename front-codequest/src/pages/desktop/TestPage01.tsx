@@ -3,21 +3,28 @@ import React, { useState, useEffect } from 'react';
 import "./TestPage01.css";
 import { Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import handleInputChange from '../../handleResp';
-import respostasData from '../../respostasData';
+
+const LOCAL_STORAGE_KEY = "respostasPage1"; 
+
+const answerMapping: { [key: string]: number } = {
+  "nadaEmpolgado": 1, "poucoEmpolgado": 2, "neutro": 3, "empolgado": 4, "muitoEmpolgado": 5,
+  "nadaInteressado": 1, "poucoInteressado": 2, "interessado": 4, "muitoInteressado": 5,
+  "nadaAtraido": 1, "poucoAtraido": 2, "atraido": 4, "muitoAtraido": 5,
+  "nadaEmocionante": 1, "poucoEmocionante": 2, "emocionante": 4, "muitoEmocionante": 5
+};
 
 interface TestPage01DesktopProps {
-  onRespostasChange: (respostas: { resposta1: string; resposta2: string; resposta3: string; resposta4: string; }) => void;
+  onRespostasChange: (respostas: { resposta1: number | null; resposta2: number | null; resposta3: number | null; resposta4: number | null; }) => void;
 }
 
 const TestPage01Desktop: FunctionComponent<TestPage01DesktopProps> = ({ onRespostasChange }) => {
 
-const [redirecting, setRedirecting] = useState(false);
-const [respostas, setRespostas] = useState({
-  resposta1: "",
-  resposta2: "",
-  resposta3: "",
-  resposta4: "",
+const [redirecting, setRedirecting] = useState(false); // Keep for button visual feedback if desired
+const [respostas, setRespostas] = useState<{ resposta1: number | null; resposta2: number | null; resposta3: number | null; resposta4: number | null; }>({
+  resposta1: null,
+  resposta2: null,
+  resposta3: null,
+  resposta4: null,
 });
 
 React.useEffect(() => {
@@ -25,341 +32,355 @@ React.useEffect(() => {
 }, [onRespostasChange, respostas]);
 
 useEffect(() => {
-  // Carregar respostas salvas quando o componente monta
-  const savedRespostas = localStorage.getItem("respostas");
+  const savedRespostas = localStorage.getItem(LOCAL_STORAGE_KEY); 
   if (savedRespostas) {
-    setRespostas(JSON.parse(savedRespostas));
+    try {
+      const parsedRespostas = JSON.parse(savedRespostas);
+      setRespostas({
+        resposta1: typeof parsedRespostas.resposta1 === 'number' ? parsedRespostas.resposta1 : null,
+        resposta2: typeof parsedRespostas.resposta2 === 'number' ? parsedRespostas.resposta2 : null,
+        resposta3: typeof parsedRespostas.resposta3 === 'number' ? parsedRespostas.resposta3 : null,
+        resposta4: typeof parsedRespostas.resposta4 === 'number' ? parsedRespostas.resposta4 : null,
+      });
+    } catch (error) {
+      console.error("Failed to parse respostas from localStorage for Page 1", error);
+      setRespostas({ resposta1: null, resposta2: null, resposta3: null, resposta4: null });
+    }
   }
-}, []);
+}, []); 
 
 useEffect(() => {
-  // Salvar respostas no localStorage sempre que elas mudam
-  localStorage.setItem("respostas", JSON.stringify(respostas));
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(respostas)); 
 }, [respostas]);
-const handleRespostaChange = (pergunta: string, resposta: string) => {
+
+const handleRespostaChange = (pergunta: keyof typeof respostas, respostaValue: string) => {
+  const mappedValue = answerMapping[respostaValue];
   setRespostas((prevRespostas) => ({
     ...prevRespostas,
-    [pergunta]: resposta,
+    [pergunta]: mappedValue !== undefined ? mappedValue : (respostaValue === "neutro" ? 3 : null),
   }));
 };
 
-  const handleRedirect = () => {
+  const handleLinkClick = () => { // Renamed from handleRedirect to avoid confusion
     setRedirecting(true);
     setTimeout(() => {
       setRedirecting(false); 
-    }, 5000); 
+    }, 1000); // Shorter delay for link clicks
   };
 
   return (
     <div className="testpage01-desktop">
-      <div className="test-page3">
-        <div className="background-iniciar3">
-          <img
-            className="rectangle-login-icon3"
-            alt=""
-            src="/rectangle-quest.png" />
+      <div className="test-page-container"> {/* Renamed from test-page3 for clarity */}
+        {/* The background image div is removed, .test-page-container will be styled */}
+        <img className="logo-padrao" alt="CodeQuest Logo" src="/logo-padrao1@2x.png" /> {/* Simplified class */}
+        
+        <div className="title-test"> {/* Simplified class */}
+          <div className="rectangle-title-bg" /> {/* Simplified class */}
+          <div className="title-text"> {/* Simplified class */}
+            Em uma escala de 1 a 5, o quanto você:
+          </div>
         </div>
-        <img className="logo-padrao-icon8" alt="" src="/logo-padrao1@2x.png" />
-        <ol className="text-test3">
-          <h2 className="se-sente-empolgado-container">
-            <ul className="se-sente-empolgado-com-a-ideia">
-              <h3 className="nada-empolgado">
-                <b>
-                  Se sente empolgado com a ideia de criar programas que podem
-                  melhorar a forma como as empresas ou pessoas realizam tarefas?
-                </b>
-              </h3>
-            </ul>
-            <ul className="se-sente-empolgado-com-a-ideia">
-              <h4 className="nada-empolgado">
+
+        <div className="questions-area"> {/* Renamed from text-test3 */}
+          <div className="question-row">
+            <div className="question-container se-sente-empolgado-container"> {/* Added base class */}
+              <ul className="question-options-list"> {/* Renamed for clarity */}
+                <h3 className="question-title"> {/* Simplified class */}
+                  <b>
+                    Se sente empolgado com a ideia de criar programas que podem
+                    melhorar a forma como as empresas ou pessoas realizam tarefas?
+                  </b>
+                </h3>
+              {/* Options */}
+              <li className="option-item"> {/* Changed h4 to li for semantic list */}
               <label><input 
                   type="radio" 
                   value="nadaEmpolgado" 
                   name="resposta1"
-                  checked={respostas.resposta1 === "nadaEmpolgado"}
+                  checked={respostas.resposta1 === answerMapping["nadaEmpolgado"]}
                   onChange={() => handleRespostaChange("resposta1", "nadaEmpolgado")}
                   />{" "}
                    Nada Empolgado
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="poucoEmpolgado" 
                   name="resposta1"
-                  checked={respostas.resposta1 === "poucoEmpolgado"}
+                  checked={respostas.resposta1 === answerMapping["poucoEmpolgado"]}
                   onChange={() => handleRespostaChange("resposta1", "poucoEmpolgado")}
                   />{" "}
                    Pouco Empolgado
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="neutro" 
                   name="resposta1"
-                  checked={respostas.resposta1 === "neutro"}
+                  checked={respostas.resposta1 === answerMapping["neutro"]}
                   onChange={() => handleRespostaChange("resposta1", "neutro")}
                   />{" "}
                    Neutro
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="empolgado" 
                   name="resposta1"
-                  checked={respostas.resposta1 === "empolgado"}
+                  checked={respostas.resposta1 === answerMapping["empolgado"]}
                   onChange={() => handleRespostaChange("resposta1", "empolgado")}
                   />{" "}
                    Empolgado
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="muitoEmpolgado" 
                   name="resposta1"
-                  checked={respostas.resposta1 === "muitoEmpolgado"}
+                  checked={respostas.resposta1 === answerMapping["muitoEmpolgado"]}
                   onChange={() => handleRespostaChange("resposta1", "muitoEmpolgado")}
                   />{" "}
                    Muito Empolgado
                 </label>
-              </h4>
+              </li>
             </ul>
-          </h2>
-          <div className="gostaria-de-aprender-container2">
-            <ul className="se-sente-empolgado-com-a-ideia">
-              <h3 className="nada-empolgado">
-                <b>
-                  Gostaria de aprender a linguagem "código" para criar
-                  aplicativos, jogos ou software?
-                </b>
-              </h3>
-            </ul>
-            <ul className="se-sente-empolgado-com-a-ideia">
-              <h4 className="nada-empolgado">
+            </div>
+
+            <div className="question-container gostaria-de-aprender-container2"> {/* Added base class */}
+              <ul className="question-options-list">
+                <h3 className="question-title">
+                  <b>
+                    Gostaria de aprender a linguagem "código" para criar
+                    aplicativos, jogos ou software?
+                  </b>
+                </h3>
+              {/* Options */}
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="nadaInteressado" 
                   name="resposta2"
-                  checked={respostas.resposta2 === "nadaInteressado"}
+                  checked={respostas.resposta2 === answerMapping["nadaInteressado"]}
                   onChange={() => handleRespostaChange("resposta2", "nadaInteressado")}
                   />{" "}
                    Nada interessado
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="poucoInteressado" 
                   name="resposta2"
-                  checked={respostas.resposta2 === "poucoInteressado"}
+                  checked={respostas.resposta2 === answerMapping["poucoInteressado"]}
                   onChange={() => handleRespostaChange("resposta2", "poucoInteressado")}
                   />{" "}
                    Pouco interessado
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="neutro" 
                   name="resposta2"
-                  checked={respostas.resposta2 === "neutro"}
+                  checked={respostas.resposta2 === answerMapping["neutro"]}
                   onChange={() => handleRespostaChange("resposta2", "neutro")}
                   />{" "}
                    Neutro
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="interessado" 
                   name="resposta2"
-                  checked={respostas.resposta2 === "interessado"}
+                  checked={respostas.resposta2 === answerMapping["interessado"]}
                   onChange={() => handleRespostaChange("resposta2", "interessado")}
                   />{" "}
-                   Neutro
+                   Interessado
                 </label>
-              </h4>
-              <h4>
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="muitoInteressado" 
                   name="resposta2"
-                  checked={respostas.resposta2 === "muitoInteressado"}
+                  checked={respostas.resposta2 === answerMapping["muitoInteressado"]}
                   onChange={() => handleRespostaChange("resposta2", "muitoInteressado")}
                   />{" "}
                    Muito Interessado
                 </label>
-              </h4>
+              </li>
             </ul>
+            </div>
           </div>
-          <div className="se-sente-atrado-container">
-            <ul className="se-sente-empolgado-com-a-ideia">
-              <h3 className="nada-empolgado">
-                <b>
-                  Se sente atraído por trabalhar em equipe para criar
-                  aplicativos ou software maiores?
-                </b>
-              </h3>
-            </ul>
-            <ul className="se-sente-empolgado-com-a-ideia">
-              <h4 className="nada-empolgado">
+
+          <div className="question-row">
+            <div className="question-container se-sente-atrado-container"> {/* Added base class */}
+              <ul className="question-options-list">
+                <h3 className="question-title">
+                  <b>
+                    Se sente atraído por trabalhar em equipe para criar
+                    aplicativos ou software maiores?
+                  </b>
+                </h3>
+              {/* Options */}
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="nadaAtraido" 
                   name="resposta3"
-                  checked={respostas.resposta3 === "nadaAtraido"}
+                  checked={respostas.resposta3 === answerMapping["nadaAtraido"]}
                   onChange={() => handleRespostaChange("resposta3", "nadaAtraido")}
                   />{" "}
                    Nada atraido
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="poucoAtraido" 
                   name="resposta3"
-                  checked={respostas.resposta3 === "poucoAtraido"}
+                  checked={respostas.resposta3 === answerMapping["poucoAtraido"]}
                   onChange={() => handleRespostaChange("resposta3", "poucoAtraido")}
                   />{" "}
                    Pouco atraido
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="neutro" 
                   name="resposta3"
-                  checked={respostas.resposta3 === "neutro"}
+                  checked={respostas.resposta3 === answerMapping["neutro"]}
                   onChange={() => handleRespostaChange("resposta3", "neutro")}
                   />{" "}
                    Neutro
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="atraido" 
                   name="resposta3"
-                  checked={respostas.resposta3 === "atraido"}
+                  checked={respostas.resposta3 === answerMapping["atraido"]}
                   onChange={() => handleRespostaChange("resposta3", "atraido")}
                   />{" "}
                    Atraido
                 </label>
-              </h4>
-              <h4>
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="muitoAtraido" 
                   name="resposta3"
-                  checked={respostas.resposta3 === "muitoAtraido"}
+                  checked={respostas.resposta3 === answerMapping["muitoAtraido"]}
                   onChange={() => handleRespostaChange("resposta3", "muitoAtraido")}
                   />{" "}
                    Muito Atraido
                 </label>
-              </h4>
+              </li>
             </ul>
-          </div>
-          <div className="considera-emocionante-a-container">
-            <ul className="se-sente-empolgado-com-a-ideia">
-              <h3 className="nada-empolgado">
-                <b>
-                  Considera emocionante a possibilidade de ver suas ideias se
-                  transformarem em programas ou aplicativos reais?
-                </b>
-              </h3>
-            </ul>
-            <ul className="se-sente-empolgado-com-a-ideia">
-              <h4 className="nada-empolgado">
+            </div>
+
+            <div className="question-container considera-emocionante-a-container"> {/* Added base class */}
+              <ul className="question-options-list">
+                <h3 className="question-title">
+                  <b>
+                    Considera emocionante a possibilidade de ver suas ideias se
+                    transformarem em programas ou aplicativos reais?
+                  </b>
+                </h3>
+              {/* Options */}
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="nadaEmocionante" 
                   name="resposta4"
-                  checked={respostas.resposta4 === "nadaEmocionante"}
+                  checked={respostas.resposta4 === answerMapping["nadaEmocionante"]}
                   onChange={() => handleRespostaChange("resposta4", "nadaEmocionante")}
                   />{" "}
                    Nada emocionante
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="poucoEmocionante" 
                   name="resposta4"
-                  checked={respostas.resposta4 === "poucoEmocionante"}
+                  checked={respostas.resposta4 === answerMapping["poucoEmocionante"]}
                   onChange={() => handleRespostaChange("resposta4", "poucoEmocionante")}
                   />{" "}
                    Pouco emocionante
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="neutro" 
                   name="resposta4"
-                  checked={respostas.resposta4 === "neutro"}
+                  checked={respostas.resposta4 === answerMapping["neutro"]}
                   onChange={() => handleRespostaChange("resposta4", "neutro")}
                   />{" "}
                    Neutro
                 </label>
-              </h4>
-              <h4 className="nada-empolgado">
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="emocionante" 
                   name="resposta4"
-                  checked={respostas.resposta4 === "emocionante"}
+                  checked={respostas.resposta4 === answerMapping["emocionante"]}
                   onChange={() => handleRespostaChange("resposta4", "emocionante")}
                   />{" "}
                    Emocionante
                 </label>
-              </h4>
-              <h4>
+              </li>
+              <li className="option-item">
               <label><input 
                   type="radio" 
                   value="muitoEmocionante" 
                   name="resposta4"
-                  checked={respostas.resposta4 === "muitoEmocionante"}
+                  checked={respostas.resposta4 === answerMapping["muitoEmocionante"]}
                   onChange={() => handleRespostaChange("resposta4", "muitoEmocionante")}
                   />{" "}
                    Muito Emocionante
                 </label>
-              </h4>
+              </li>
             </ul>
-          </div>
-        </ol>
-        <div className="title-test3">
-          <div className="rectangle-div" />
-          <div className="em-uma-escala3">
-            Em uma escala de 1 a 5, o quanto você:
+            </div>
           </div>
         </div>
-        <Link to="/testpage02">
-          <Button
-            className="boto-continuar"
-            name="Botão Continuar"
-            id="btnContinuar"
-            variant="primary"
-            onClick={handleRedirect}
-            disabled={redirecting}
-          >
-            {redirecting ? "Aguarde..." : "CONTINUAR"}
-          </Button>
-        </Link>
-        <Link to="/">
-          <Button
-            className="boto-anterior"
-            name="Botão Anterior"
-            id="btnAnterior"
-            variant="primary"
-            onClick={handleRedirect}
-            disabled={redirecting}
-          >
-            {redirecting ? "Aguarde..." : <img src="/arrow.svg" alt="Seta" />}
-          </Button>
-        </Link>
+        
+        <div className="navigation-buttons">
+          <Link to="/">
+            <Button
+              className="boto-anterior"
+              name="Botão Anterior"
+              id="btnAnterior"
+              variant="primary"
+              onClick={handleLinkClick}
+              disabled={redirecting}
+            >
+              {redirecting ? "..." : <img src="/arrow.svg" alt="Anterior" />}
+            </Button>
+          </Link>
+          <Link to="/testpage02">
+            <Button
+              className="boto-continuar"
+              name="Botão Continuar"
+              id="btnContinuar"
+              variant="primary"
+              onClick={handleLinkClick}
+              disabled={redirecting}
+            >
+              {redirecting ? "Aguarde..." : "CONTINUAR"}
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
